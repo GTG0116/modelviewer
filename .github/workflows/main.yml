@@ -1,0 +1,32 @@
+name: Update Weather Models
+on:
+  schedule:
+    - cron: '15 * * * *' # Runs at 15 minutes past every hour
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install herbie xarray cfgrib matplotlib cartopy scipy numpy pytz requests
+
+      - name: Run Model Engine
+        run: python generate_images.py
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add frames_*
+          git commit -m "Automated Model Update: $(date)" || echo "No changes to commit"
+          git push
