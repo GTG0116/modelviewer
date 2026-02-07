@@ -1,32 +1,45 @@
 name: Update Weather Models
+
 on:
   schedule:
-    - cron: '15 * * * *' # Runs at 15 minutes past every hour
-  workflow_dispatch: # Allows manual trigger
+    # Run every 6 hours (at 00, 06, 12, 18 UTC)
+    - cron: '0 0,6,12,18 * * *'
+  workflow_dispatch: # Allows manual trigger button
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  build-and-plot:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install Dependencies
+      # Crucial Step: Install System Dependencies for GRIB handling
+      - name: Install System Dependencies
         run: |
-          pip install herbie xarray cfgrib matplotlib cartopy scipy numpy pytz requests
+          sudo apt-get update
+          sudo apt-get install -y libeccodes-dev libgeos-dev
 
-      - name: Run Model Engine
-        run: python generate_images.py
-
-      - name: Commit and Push
+      - name: Install Python Libraries
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add frames_*
-          git commit -m "Automated Model Update: $(date)" || echo "No changes to commit"
+          pip install -r requirements.txt
+
+      - name: Run Plotting Script
+        run: python scripts/plot_models.py
+
+      - name: Commit and Push Images
+        run: |
+          git config --global user.name "WeatherBot"
+          git config --global user.email "bot@noreply.github.com"
+          git add images/*.png
+          # Only commit if there are changes
+          git commit -m "Update weather model plots [skip ci]" || exit 0
           git push
