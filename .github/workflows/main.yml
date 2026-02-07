@@ -2,17 +2,12 @@ name: Update Weather Models
 
 on:
   schedule:
-    # Run every 6 hours (at 00, 06, 12, 18 UTC)
     - cron: '0 0,6,12,18 * * *'
-  workflow_dispatch: # Allows manual trigger button
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
   build-and-plot:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -22,7 +17,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      # Crucial Step: Install System Dependencies for GRIB handling
       - name: Install System Dependencies
         run: |
           sudo apt-get update
@@ -30,25 +24,19 @@ jobs:
 
       - name: Install Python Libraries
         run: |
-          pip install -r requirements.txt
-
-    # ... (lines 1-32 are the same as before) ...
+          pip install herbie-data xarray cfgrib matplotlib cartopy scipy numpy
 
       - name: Run Plotting Script
         run: python scripts/plot_models.py
 
-      # NEW: Debug step to show us what was created
-      - name: Debug - List Images
-        run: ls -R images/ || echo "Images directory not found"
+      # Clean up GRIB files to keep the runner lean
+      - name: Cleanup Data
+        run: rm -rf data/
 
-      - name: Commit and Push Images
+      - name: Commit and Push
         run: |
           git config --global user.name "WeatherBot"
           git config --global user.email "bot@noreply.github.com"
-          
-          # Force add the images folder if it exists
-          git add images/ || echo "No images to add"
-          
-          # Commit only if there are changes
-          git commit -m "Update weather model plots [skip ci]" || echo "No changes to commit"
+          git add images/*.png || echo "No new images"
+          git commit -m "Update NE plots from AWS [skip ci]" || echo "No changes"
           git push
