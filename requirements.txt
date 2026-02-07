@@ -1,0 +1,7 @@
+herbie-data
+xarray
+cfgrib
+matplotlib
+cartopy
+scipy
+numpy
