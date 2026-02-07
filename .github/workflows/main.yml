@@ -32,14 +32,23 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+    # ... (lines 1-32 are the same as before) ...
+
       - name: Run Plotting Script
         run: python scripts/plot_models.py
+
+      # NEW: Debug step to show us what was created
+      - name: Debug - List Images
+        run: ls -R images/ || echo "Images directory not found"
 
       - name: Commit and Push Images
         run: |
           git config --global user.name "WeatherBot"
           git config --global user.email "bot@noreply.github.com"
-          git add images/*.png
-          # Only commit if there are changes
-          git commit -m "Update weather model plots [skip ci]" || exit 0
+          
+          # Force add the images folder if it exists
+          git add images/ || echo "No images to add"
+          
+          # Commit only if there are changes
+          git commit -m "Update weather model plots [skip ci]" || echo "No changes to commit"
           git push
