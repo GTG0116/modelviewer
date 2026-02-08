@@ -10,11 +10,13 @@
     "image": "images/gfs.png"
   },
   "nam": {
-    "status": "failed",
-    "image": "images/placeholder.png"
+    "status": "success",
+    "run": "08 Feb 18:00Z",
+    "image": "images/nam.png"
   },
   "nam3k": {
-    "status": "failed",
-    "image": "images/placeholder.png"
+    "status": "success",
+    "run": "08 Feb 18:00Z",
+    "image": "images/nam3k.png"
   }
 }
