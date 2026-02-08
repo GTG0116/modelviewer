@@ -16,11 +16,10 @@ def get_run_time(model_name):
     now = datetime.utcnow()
     
     if model_name in ['hrrr', 'rrfs']:
-        # HRRR/RRFS: Runs hourly. Back up 2 hours to ensure upload is complete.
+        # HRRR runs hourly. Back up 1 hour.
         return now.replace(minute=0, second=0, microsecond=0) - timedelta(hours=1)
     else:
-        # GFS/NAM: Runs every 6 hours (00, 06, 12, 18).
-        # We find the previous cycle floor.
+        # GFS/NAM run every 6 hours (00, 06, 12, 18).
         hour = (now.hour // 6) * 6
         return now.replace(hour=hour, minute=0, second=0, microsecond=0)
 
@@ -28,10 +27,9 @@ def plot_model(name, config):
     print(f"\n--- Processing {name.upper()} ---")
     base_time = get_run_time(name)
     
-    # Try the last 3 cycles. If the current one isn't up, try the previous.
-    for cycle_offset in range(3):
-        # Calculate the run time to search for
-        if name in ['hrrr', 'rrfs']:
+    # Check current cycle and previous ones if needed
+    for cycle_offset in range(4):
+        if name == 'hrrr':
             run_dt = base_time - timedelta(hours=cycle_offset)
         else:
             run_dt = base_time - timedelta(hours=cycle_offset * 6)
@@ -40,56 +38,42 @@ def plot_model(name, config):
             print(f"  Attempting cycle: {run_dt.strftime('%Y-%m-%d %H:00')} UTC...")
             
             # 1. Initialize Herbie
-            # We use 'aws' first. If it fails, Herbie might try others if configured,
-            # but for GitHub Actions, we want to stick to AWS/NOMADS.
             H = Herbie(
                 run_dt,
                 model=config['model'],
                 product=config['product'],
                 priority=['aws', 'nomads'], 
                 save_dir='./data',
-                fxx=0, # Analysis hour
+                fxx=0,
                 verbose=False
             )
 
-            # 2. Key Filtering (THE FIX FOR GFS/HRRR)
-            # We must tell cfgrib EXACTLY which message to read to prevent crashes.
-            # GRIBs have multiple "t" variables. We want 2m height.
+            # 2. Key Filtering
+            # Crucial for GRIB2 files to select the "Instant" temperature
             backend_kwargs = {
                 'filter_by_keys': {
                     'typeOfLevel': 'heightAboveGround',
                     'level': 2,
-                    'stepType': 'instant' # Ensures we don't get averages/accumulations
+                    'stepType': 'instant' 
                 }
             }
 
             # 3. Download & Open
-            # strict=False allows it to fail gracefully if the index is bad
-            try:
-                ds = H.xarray(
-                    config['search'], 
-                    backend_kwargs=backend_kwargs, 
-                    verbose=False
-                )
-            except Exception as read_err:
-                print(f"    ! Download/Read failed: {read_err}")
-                continue
+            ds = H.xarray(
+                config['search'], 
+                backend_kwargs=backend_kwargs, 
+                verbose=False
+            )
 
-            # 4. Check for Data
             if ds is None or len(ds.data_vars) == 0:
-                print("    ! Dataset opened but is empty.")
+                print("    ! Dataset empty.")
                 continue
                 
-            # Find the temperature variable (could be t, t2m, tp, etc.)
-            # We look for the first variable in the dataset
+            # Grab the variable (t, t2m, etc.)
             var_name = list(ds.data_vars)[0]
-            print(f"    Found variable: {var_name}")
             data = ds[var_name]
 
-            # 5. Plotting
-            print("    Generating plot...")
-            
-            # Convert Kelvin to Fahrenheit
+            # 4. Plotting
             data_f = (data - 273.15) * 9/5 + 32
             
             fig = plt.figure(figsize=(10, 8))
@@ -132,39 +116,33 @@ def plot_model(name, config):
             }
 
         except Exception as e:
-            print(f"    ! Error processing cycle: {e}")
-            # import traceback
-            # traceback.print_exc()
+            print(f"    ! Error: {e}")
             continue
 
     print(f"  ❌ All attempts failed for {name}")
     return {"status": "failed", "image": "images/placeholder.png"}
 
-# --- Configuration ---
+# --- UPDATED CONFIGURATION ---
 models = {
-    # HRRR: High Resolution Rapid Refresh
     'hrrr': {
         'model': 'hrrr', 
         'product': 'sfc', 
         'search': ':TMP:2 m'
     },
-    # GFS: Global Forecast System
     'gfs': {
         'model': 'gfs', 
         'product': 'pgrb2.0p25', 
         'search': ':TMP:2 m'
     },
-    # NAM: North American Mesoscale (12km)
+    # CORRECTED NAM PRODUCT NAMES
     'nam': {
         'model': 'nam', 
-        'product': 'conus', 
+        'product': 'awip12',  # Changed from 'conus'
         'search': ':TMP:2 m'
     },
-    # NAM Nest: 3km resolution
-    # Note: 'search' is broad because NAM labels change
     'nam3k': {
         'model': 'nam', 
-        'product': 'conusnest', 
+        'product': 'conusnest.hiresf', # Changed from 'conusnest'
         'search': ':TMP:2 m'
     }
 }
