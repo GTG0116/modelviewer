@@ -1,4 +1,4 @@
-herbie-data
+herbie-data>=2024.1.0
 xarray
 cfgrib
 matplotlib
