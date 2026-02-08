@@ -5,106 +5,124 @@ from herbie import Herbie
 from datetime import datetime, timedelta
 import warnings
 import os
+import json
+import sys
 
 warnings.filterwarnings("ignore")
 
-def get_latest_run_time(model_name):
+# Define the models and their specific complexities
+models = {
+    'hrrr':   {'model': 'hrrr', 'product': 'sfc', 'search': ':TMP:2 m', 'step': 1},
+    'gfs':    {'model': 'gfs',  'product': 'pgrb2.0p25', 'search': ':TMP:2 m', 'step': 6},
+    'nam':    {'model': 'nam',  'product': 'conus', 'search': ':TMP:2 m', 'step': 6},
+    'nam3k':  {'model': 'nam',  'product': 'conusnest', 'search': ':TMP:2 m', 'step': 6},
+    # RRFS is often delayed by 6-12 hours on the public bucket
+    'rrfs':   {'model': 'rrfs', 'product': 'prslev', 'member': 'control', 'search': ':TMP:2 m', 'step': 1}
+}
+
+def get_start_time(model_name):
+    """Returns the most recent possible run time for a model."""
     now = datetime.utcnow()
-    if model_name == 'hrrr':
+    if model_name in ['hrrr', 'rrfs']:
         return now.replace(minute=0, second=0, microsecond=0)
     else:
-        # NAM and GFS run 00, 06, 12, 18
+        # Synoptic models (GFS, NAM) run at 00, 06, 12, 18
         hour = (now.hour // 6) * 6
         return now.replace(hour=hour, minute=0, second=0, microsecond=0)
 
-def plot_temperature(model_name, config):
-    print(f"\n--- Investigating {model_name.upper()} ---")
+def plot_model(name, config):
+    print(f"\n--- Processing {name.upper()} ---")
+    base_time = get_start_time(name)
     
-    base_time = get_latest_run_time(model_name)
-    found_data = False
-    
-    # Check the last 6 available cycles (going back further for NAM)
-    for i in range(6):
-        decrement = 6 if model_name != 'hrrr' else 1
-        search_dt = base_time - timedelta(hours=i * decrement)
+    # Look back up to 12 cycles to find data
+    # (NAM and RRFS on AWS are notoriously slow to upload)
+    for i in range(12):
+        delta = i * config['step']
+        run_dt = base_time - timedelta(hours=delta)
         
         try:
-            print(f"  Checking {search_dt.strftime('%Y-%m-%d %H:00')}...")
+            print(f"  Checking {run_dt.strftime('%H')}z run...")
             
+            # 1. Initialize Herbie
+            # We strictly prioritize AWS, then NOMADS (NOAA)
             H = Herbie(
-                search_dt,
+                run_dt,
                 model=config['model'],
                 product=config['product'],
-                fxx=0, 
-                priority=['aws', 'nomads'],
+                member=config.get('member'),
+                priority=['aws', 'nomads'], 
                 save_dir='./data'
             )
-            
-            # BROAD SEARCH: NAM sometimes uses '2 m above ground', others '2 m'
-            # This regex-style search captures both.
-            ds = H.xarray(":TMP:2 m", verbose=False)
-            
-            if ds is None:
-                # One last try for NAM3k specifically: check f01 if f00 is missing
-                if model_name == 'nam3k':
-                    H = Herbie(search_dt, model='nam', product='conusnest', fxx=1)
-                    ds = H.xarray(":TMP:2 m", verbose=False)
-                
-                if ds is None: continue
 
-            # Standardize variable name
-            # NAM often labels it 't' or 't2m'
-            data_var = [v for v in ds.data_vars if 't' in v or 'TMP' in v][0]
-            data_f = (ds[data_var] - 273.15) * 9/5 + 32
+            # 2. Search for Data
+            # "fxx=0" is the Analysis hour. 
+            ds = H.xarray(config['search'], fxx=0, verbose=False)
+            
+            if ds is None or ds.sizes == {}:
+                continue
 
-            # --- Plotting ---
-            fig = plt.figure(figsize=(12, 9))
+            # 3. Variable Extraction
+            # Models name things differently (t, t2m, etc.)
+            var_name = list(ds.data_vars)[0]
+            data = ds[var_name]
+            
+            # Convert K -> F
+            data_f = (data - 273.15) * 9/5 + 32
+
+            # 4. Plotting (Northeast US)
+            fig = plt.figure(figsize=(10, 8))
             proj = ccrs.LambertConformal(central_longitude=-75, central_latitude=42)
             ax = fig.add_subplot(1, 1, 1, projection=proj)
-            
-            # Northeast Sector
-            ax.set_extent([-82, -66, 37, 48], crs=ccrs.PlateCarree())
+            ax.set_extent([-82, -66, 37, 47], crs=ccrs.PlateCarree())
 
-            ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=1)
-            ax.add_feature(cfeature.STATES.with_scale('50m'), linewidth=0.8)
-            ax.add_feature(cfeature.LAKES.with_scale('50m'), alpha=0.3)
+            # Features
+            ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=0.8)
+            ax.add_feature(cfeature.STATES.with_scale('50m'), linewidth=0.5)
+            ax.add_feature(cfeature.BORDERS.with_scale('50m'), linestyle=':')
 
+            # Mesh
             mesh = ax.pcolormesh(ds.longitude, ds.latitude, data_f,
                                  transform=ccrs.PlateCarree(),
-                                 cmap='turbo', vmin=0, vmax=100, shading='auto')
-
-            plt.colorbar(mesh, orientation='vertical', shrink=0.7, label='Temperature (°F)')
+                                 cmap='turbo', vmin=-10, vmax=100, shading='auto')
             
-            # Timestamps for verification
-            plt.title(f"{model_name.upper()} 2m Temperature", loc='left', fontweight='bold')
-            plt.title(f"Init: {search_dt.strftime('%m/%d %H')}Z | Sector: NE", loc='right')
+            plt.colorbar(mesh, orientation='vertical', shrink=0.7, label='Temperature (°F)', pad=0.02)
+            
+            # Labels
+            init_str = run_dt.strftime('%Y-%m-%d %H')
+            plt.title(f"{name.upper()}", loc='left', fontweight='bold', fontsize=14)
+            plt.title(f"Init: {init_str}Z", loc='right', fontsize=10)
 
-            os.makedirs("images", exist_ok=True)
-            out_path = f"images/{model_name}_temp.png"
-            plt.savefig(out_path, bbox_inches='tight', dpi=120)
+            # Save
+            out_file = f"site/images/{name}.png"
+            os.makedirs("site/images", exist_ok=True)
+            plt.savefig(out_file, bbox_inches='tight', dpi=100)
             plt.close()
             
-            print(f"✅ SUCCESS: {model_name} generated at {out_path}")
-            found_data = True
-            break 
+            print(f"  ✅ Saved {out_file}")
+            
+            # Return Metadata for the website
+            return {
+                "status": "success",
+                "run": f"{init_str}Z",
+                "image": f"images/{name}.png"
+            }
 
         except Exception as e:
-            # Uncomment for local debugging:
-            # print(f"    Debug: {e}")
+            # print(f"    Error: {e}") 
             continue
-            
-    if not found_data:
-        print(f"❌ FAIL: {model_name} not found after checking 6 cycles.")
 
-# Updated Product Mapping for AWS/Herbie
-models = {
-    'hrrr':  {'model': 'hrrr', 'product': 'sfc'},
-    'gfs':   {'model': 'gfs',  'product': 'pgrb2.0p25'},
-    'nam':   {'model': 'nam',  'product': 'conus'},
-    'nam3k': {'model': 'nam',  'product': 'conusnest'}
-}
+    print(f"  ❌ Failed to find data for {name}")
+    return {"status": "failed", "image": "images/placeholder.png"}
 
 if __name__ == "__main__":
-    os.makedirs("images", exist_ok=True)
-    for name, config in models.items():
-        plot_temperature(name, config)
+    # Create site directory
+    os.makedirs("site/images", exist_ok=True)
+    
+    status_report = {}
+    
+    for model_name, config in models.items():
+        status_report[model_name] = plot_model(model_name, config)
+    
+    # Save the status JSON for the frontend to read
+    with open("site/status.json", "w") as f:
+        json.dump(status_report, f, indent=2)
