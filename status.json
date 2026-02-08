@@ -1,0 +1,22 @@
+{
+  "hrrr": {
+    "status": "failed",
+    "image": "images/placeholder.png"
+  },
+  "gfs": {
+    "status": "failed",
+    "image": "images/placeholder.png"
+  },
+  "nam": {
+    "status": "failed",
+    "image": "images/placeholder.png"
+  },
+  "nam3k": {
+    "status": "failed",
+    "image": "images/placeholder.png"
+  },
+  "rrfs": {
+    "status": "failed",
+    "image": "images/placeholder.png"
+  }
+}
