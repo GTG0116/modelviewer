@@ -1,21 +1,19 @@
 {
   "hrrr": {
-    "status": "failed",
-    "image": "images/placeholder.png"
+    "status": "success",
+    "run": "08 Feb 20:00Z",
+    "image": "images/hrrr.png"
   },
   "gfs": {
-    "status": "failed",
-    "image": "images/placeholder.png"
+    "status": "success",
+    "run": "08 Feb 12:00Z",
+    "image": "images/gfs.png"
   },
   "nam": {
     "status": "failed",
     "image": "images/placeholder.png"
   },
   "nam3k": {
-    "status": "failed",
-    "image": "images/placeholder.png"
-  },
-  "rrfs": {
     "status": "failed",
     "image": "images/placeholder.png"
   }
