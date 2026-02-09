@@ -1,7 +1,7 @@
 {
   "hrrr": {
     "status": "success",
-    "run": "08 Feb 20:00Z",
+    "run": "09 Feb 00:00Z",
     "image": "images/hrrr.png"
   },
   "gfs": {
@@ -11,12 +11,12 @@
   },
   "nam": {
     "status": "success",
-    "run": "08 Feb 18:00Z",
+    "run": "09 Feb 00:00Z",
     "image": "images/nam.png"
   },
   "nam3k": {
     "status": "success",
-    "run": "08 Feb 18:00Z",
+    "run": "09 Feb 00:00Z",
     "image": "images/nam3k.png"
   }
 }
