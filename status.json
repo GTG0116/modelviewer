@@ -1,22 +1,26 @@
 {
   "hrrr": {
-    "status": "success",
-    "run": "10 Feb 21:00Z",
-    "image": "images/hrrr.png"
+    "temp": "images/hrrr_temp.png",
+    "gust": "images/hrrr_gust.png",
+    "radar": "images/hrrr_radar.png",
+    "run_time": "10 Feb 21z"
   },
   "gfs": {
-    "status": "success",
-    "run": "10 Feb 18:00Z",
-    "image": "images/gfs.png"
+    "gust": "images/gfs_gust.png",
+    "radar": "images/gfs_radar.png",
+    "snow": "images/gfs_snow.png",
+    "run_time": "10 Feb 18z"
   },
   "nam": {
-    "status": "success",
-    "run": "10 Feb 18:00Z",
-    "image": "images/nam.png"
+    "temp": "images/nam_temp.png",
+    "gust": "images/nam_gust.png",
+    "radar": "images/nam_radar.png",
+    "run_time": "10 Feb 18z"
   },
   "nam3k": {
-    "status": "success",
-    "run": "10 Feb 18:00Z",
-    "image": "images/nam3k.png"
+    "temp": "images/nam3k_temp.png",
+    "gust": "images/nam3k_gust.png",
+    "radar": "images/nam3k_radar.png",
+    "run_time": "10 Feb 18z"
   }
 }
