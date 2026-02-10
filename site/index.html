@@ -6,57 +6,77 @@
     <title>NE Weather Viewer</title>
     <style>
         body { font-family: -apple-system, sans-serif; background: #121212; color: #eee; margin: 0; padding: 20px; }
-        h1 { text-align: center; font-weight: 300; letter-spacing: 1px; }
+        h1 { text-align: center; font-weight: 300; margin-bottom: 10px; }
         
-        /* Tabs */
-        .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab { background: #333; padding: 10px 20px; border-radius: 20px; cursor: pointer; transition: 0.2s; }
-        .tab.active { background: #007bff; color: white; font-weight: bold; }
-        .tab:hover { background: #444; }
+        .controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .btn { background: #333; padding: 10px 20px; border-radius: 5px; cursor: pointer; border: 1px solid #444; color: white;}
+        .btn.active { background: #007bff; border-color: #007bff; }
+        
+        .slider-container { width: 100%; max-width: 800px; margin: 20px auto; text-align: center; }
+        input[type=range] { width: 100%; }
+        #time-display { font-size: 1.2em; font-weight: bold; color: #007bff; margin-top: 5px; }
 
-        /* Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .card { background: #1e1e1e; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .card img { width: 100%; height: auto; display: block; min-height: 200px; background: #222; }
-        .card-header { padding: 10px; display: flex; justify-content: space-between; align-items: center; background: #252525; }
-        .model-name { font-weight: bold; color: #fff; }
-        .run-time { font-size: 0.8em; color: #888; }
+        .card { background: #1e1e1e; border-radius: 8px; overflow: hidden; }
+        .card img { width: 100%; display: block; background: #000; min-height: 200px; }
+        .card-header { padding: 8px; background: #252525; display: flex; justify-content: space-between; }
     </style>
 </head>
 <body>
 
     <h1>Northeast Weather Analytics</h1>
     
-    <div class="tabs" id="tab-container">
-        <div class="tab active" onclick="setMode('temp')">Temperature</div>
-        <div class="tab" onclick="setMode('feelslike')">Feels Like</div>
-        <div class="tab" onclick="setMode('wind')">Wind Speed</div>
-        <div class="tab" onclick="setMode('gust')">Gusts</div>
-        <div class="tab" onclick="setMode('radar')">Radar</div>
-        <div class="tab" onclick="setMode('precip')">Precip (1hr)</div>
-        <div class="tab" onclick="setMode('snow')">Snow (1hr)</div>
+    <div class="controls">
+        <button class="btn active" onclick="setVar('temp')">Temperature</button>
+        <button class="btn" onclick="setVar('feelslike')">Feels Like</button>
+        <button class="btn" onclick="setVar('wind')">Wind Speed</button>
+        <button class="btn" onclick="setVar('gust')">Gusts</button>
+        <button class="btn" onclick="setVar('radar')">Radar</button>
+        <button class="btn" onclick="setVar('precip')">Precip</button>
+        <button class="btn" onclick="setVar('snow')">Snow</button>
     </div>
 
-    <div class="grid" id="grid">
-        </div>
+    <div class="slider-container">
+        <input type="range" id="timeSlider" min="0" max="23" value="0" oninput="updateTime(this.value)">
+        <div id="time-display">Forecast Hour: +0</div>
+    </div>
+
+    <div class="grid" id="grid"></div>
 
     <script>
-        let currentMode = 'temp';
-        let statusData = {};
+        let currentVar = 'temp';
+        let currentFrame = 0;
+        let modelData = {};
+        const models = ['hrrr', 'nam', 'nam3k', 'gfs'];
 
         async function init() {
             try {
                 const req = await fetch('status.json');
-                statusData = await req.json();
+                modelData = await req.json();
+                
+                // Find max frames to set slider
+                let maxFxx = 0;
+                for (let m of models) {
+                    if (modelData[m] && modelData[m].frames) {
+                        maxFxx = Math.max(maxFxx, modelData[m].frames.length - 1);
+                    }
+                }
+                document.getElementById('timeSlider').max = maxFxx;
+                
                 render();
-            } catch(e) { console.error("Loading failed", e); }
+            } catch(e) { console.error("Error loading data", e); }
         }
 
-        function setMode(mode) {
-            currentMode = mode;
-            // Update Tab UI
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll(`.tab[onclick="setMode('${mode}')"]`).forEach(t => t.classList.add('active'));
+        function setVar(v) {
+            currentVar = v;
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            render();
+        }
+
+        function updateTime(val) {
+            currentFrame = parseInt(val);
+            document.getElementById('time-display').innerText = `Forecast Hour: +${currentFrame}`;
             render();
         }
 
@@ -64,23 +84,22 @@
             const container = document.getElementById('grid');
             container.innerHTML = '';
             
-            const models = ['hrrr', 'nam', 'nam3k', 'gfs'];
-            
             models.forEach(model => {
-                const data = statusData[model];
-                if (!data) return;
+                const mData = modelData[model];
+                if (!mData || !mData.frames) return;
 
-                // Check if this model has the specific image for the current mode
-                const imgPath = data[currentMode];
+                // Find the frame that matches the current slider time
+                // (Some models might be missing specific hours, so we find the closest)
+                const frame = mData.frames.find(f => f.fxx === currentFrame) || mData.frames[0];
                 
-                if (imgPath) {
+                if (frame && frame[currentVar]) {
                     const html = `
                         <div class="card">
                             <div class="card-header">
-                                <span class="model-name">${model.toUpperCase()}</span>
-                                <span class="run-time">Run: ${data.run_time || 'N/A'}</span>
+                                <strong>${model.toUpperCase()}</strong>
+                                <span>+${frame.fxx}h (${frame.valid}Z)</span>
                             </div>
-                            <img src="${imgPath}?t=${Date.now()}" onerror="this.src='https://via.placeholder.com/400x300?text=No+Data'">
+                            <img src="${frame[currentVar]}" onerror="this.src='https://via.placeholder.com/400x300?text=No+Data'">
                         </div>
                     `;
                     container.innerHTML += html;
