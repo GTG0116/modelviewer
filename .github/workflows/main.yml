@@ -12,10 +12,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
@@ -23,19 +23,42 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libeccodes-dev libgeos-dev
+          sudo apt-get install -y libeccodes-dev
+
+      - name: Install Python Libraries
+        run: |
           pip install herbie-data xarray cfgrib matplotlib cartopy scipy numpy
 
-      - name: Generate Plots
+      - name: Run Plotting Script
         run: python scripts/plot_models.py
 
-      - name: Prepare Website
+      - name: Prepare Website Files
         run: |
-          # Move the index.html into the site folder
-          cp scripts/index.html site/index.html
-          # Add a placeholder image for failed models
-          touch site/images/placeholder.png 
+          # Ensure the site folder exists
+          mkdir -p site/images
+          
+          # Check if index.html exists in scripts, copy it. 
+          # If not, create a simple one so the site doesn't 404.
+          if [ -f scripts/index.html ]; then
+            cp scripts/index.html site/index.html
+          else
+            echo "<html><body><h1>Weather Data Loaded</h1><p>Check site/status.json for data.</p></body></html>" > site/index.html
+          fi
 
+      # --- STEP 1: Push Images to Main Branch (So you can see them) ---
+      - name: Commit to Main Branch
+        run: |
+          git config --global user.name "WeatherBot"
+          git config --global user.email "bot@noreply.github.com"
+          
+          # Force add the 'site' folder
+          git add site/
+          
+          # Commit and Push
+          git commit -m "Update weather plots [skip ci]" || echo "No changes to commit"
+          git push
+
+      # --- STEP 2: Deploy to GitHub Pages (So the website works) ---
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
