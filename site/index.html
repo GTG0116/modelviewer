@@ -3,111 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NE Weather Viewer</title>
+    <title>Northeast Weather Models</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #121212; color: #eee; margin: 0; padding: 20px; }
-        h1 { text-align: center; font-weight: 300; margin-bottom: 10px; }
-        
-        .controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .btn { background: #333; padding: 10px 20px; border-radius: 5px; cursor: pointer; border: 1px solid #444; color: white;}
-        .btn.active { background: #007bff; border-color: #007bff; }
-        
-        .slider-container { width: 100%; max-width: 800px; margin: 20px auto; text-align: center; }
-        input[type=range] { width: 100%; }
-        #time-display { font-size: 1.2em; font-weight: bold; color: #007bff; margin-top: 5px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .card { background: #1e1e1e; border-radius: 8px; overflow: hidden; }
-        .card img { width: 100%; display: block; background: #000; min-height: 200px; }
-        .card-header { padding: 8px; background: #252525; display: flex; justify-content: space-between; }
+        body { font-family: sans-serif; background: #1a1a1a; color: #fff; text-align: center; }
+        h1 { margin: 20px; }
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .card { background: #2a2a2a; padding: 10px; border-radius: 8px; width: 45%; min-width: 300px; }
+        img { width: 100%; border-radius: 4px; }
+        .meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.9em; color: #aaa; }
+        .status-ok { color: #4caf50; }
+        .status-fail { color: #f44336; }
     </style>
 </head>
 <body>
-
-    <h1>Northeast Weather Analytics</h1>
+    <h1>Northeast US Temperature Analysis</h1>
+    <div id="last-updated" style="margin-bottom: 20px; color: #888;"></div>
     
-    <div class="controls">
-        <button class="btn active" onclick="setVar('temp')">Temperature</button>
-        <button class="btn" onclick="setVar('feelslike')">Feels Like</button>
-        <button class="btn" onclick="setVar('wind')">Wind Speed</button>
-        <button class="btn" onclick="setVar('gust')">Gusts</button>
-        <button class="btn" onclick="setVar('radar')">Radar</button>
-        <button class="btn" onclick="setVar('precip')">Precip</button>
-        <button class="btn" onclick="setVar('snow')">Snow</button>
-    </div>
-
-    <div class="slider-container">
-        <input type="range" id="timeSlider" min="0" max="23" value="0" oninput="updateTime(this.value)">
-        <div id="time-display">Forecast Hour: +0</div>
-    </div>
-
-    <div class="grid" id="grid"></div>
+    <div class="grid" id="model-grid">
+        </div>
 
     <script>
-        let currentVar = 'temp';
-        let currentFrame = 0;
-        let modelData = {};
-        const models = ['hrrr', 'nam', 'nam3k', 'gfs'];
-
-        async function init() {
+        async function loadModels() {
             try {
-                const req = await fetch('status.json');
-                modelData = await req.json();
+                const response = await fetch('status.json');
+                const data = await response.json();
+                const container = document.getElementById('model-grid');
+
+                const modelOrder = ['hrrr', 'nam', 'nam3k', 'gfs', 'rrfs'];
                 
-                // Find max frames to set slider
-                let maxFxx = 0;
-                for (let m of models) {
-                    if (modelData[m] && modelData[m].frames) {
-                        maxFxx = Math.max(maxFxx, modelData[m].frames.length - 1);
-                    }
-                }
-                document.getElementById('timeSlider').max = maxFxx;
-                
-                render();
-            } catch(e) { console.error("Error loading data", e); }
-        }
-
-        function setVar(v) {
-            currentVar = v;
-            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            render();
-        }
-
-        function updateTime(val) {
-            currentFrame = parseInt(val);
-            document.getElementById('time-display').innerText = `Forecast Hour: +${currentFrame}`;
-            render();
-        }
-
-        function render() {
-            const container = document.getElementById('grid');
-            container.innerHTML = '';
-            
-            models.forEach(model => {
-                const mData = modelData[model];
-                if (!mData || !mData.frames) return;
-
-                // Find the frame that matches the current slider time
-                // (Some models might be missing specific hours, so we find the closest)
-                const frame = mData.frames.find(f => f.fxx === currentFrame) || mData.frames[0];
-                
-                if (frame && frame[currentVar]) {
+                modelOrder.forEach(model => {
+                    if (!data[model]) return;
+                    
+                    const info = data[model];
+                    const isOk = info.status === 'success';
+                    
                     const html = `
                         <div class="card">
-                            <div class="card-header">
+                            <img src="${info.image}?t=${new Date().getTime()}" alt="${model}">
+                            <div class="meta">
                                 <strong>${model.toUpperCase()}</strong>
-                                <span>+${frame.fxx}h (${frame.valid}Z)</span>
+                                <span class="${isOk ? 'status-ok' : 'status-fail'}">
+                                    ${isOk ? '✔ ' + info.run : '⚠ Data Offline'}
+                                </span>
                             </div>
-                            <img src="${frame[currentVar]}" onerror="this.src='https://via.placeholder.com/400x300?text=No+Data'">
                         </div>
                     `;
                     container.innerHTML += html;
-                }
-            });
-        }
+                });
+                
+                document.getElementById('last-updated').innerText = "Last Check: " + new Date().toLocaleString();
 
-        init();
+            } catch (e) {
+                console.error("Could not load status.json");
+            }
+        }
+        loadModels();
     </script>
 </body>
 </html>
