@@ -1,17 +1,17 @@
 {
   "hrrr": {
-    "run_time": "2026-02-26 11z",
+    "run_time": "2026-02-26 17z",
     "frames": [
       {
         "fxx": 0,
-        "valid": "11:00",
+        "valid": "17:00",
         "temp": "images/hrrr_temp_f00.png",
         "gust": "images/hrrr_gust_f00.png",
         "radar": "images/hrrr_radar_f00.png"
       },
       {
         "fxx": 1,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/hrrr_temp_f01.png",
         "gust": "images/hrrr_gust_f01.png",
         "radar": "images/hrrr_radar_f01.png",
@@ -19,7 +19,7 @@
       },
       {
         "fxx": 2,
-        "valid": "13:00",
+        "valid": "19:00",
         "temp": "images/hrrr_temp_f02.png",
         "gust": "images/hrrr_gust_f02.png",
         "radar": "images/hrrr_radar_f02.png",
@@ -27,7 +27,7 @@
       },
       {
         "fxx": 3,
-        "valid": "14:00",
+        "valid": "20:00",
         "temp": "images/hrrr_temp_f03.png",
         "gust": "images/hrrr_gust_f03.png",
         "radar": "images/hrrr_radar_f03.png",
@@ -35,7 +35,7 @@
       },
       {
         "fxx": 4,
-        "valid": "15:00",
+        "valid": "21:00",
         "temp": "images/hrrr_temp_f04.png",
         "gust": "images/hrrr_gust_f04.png",
         "radar": "images/hrrr_radar_f04.png",
@@ -43,7 +43,7 @@
       },
       {
         "fxx": 5,
-        "valid": "16:00",
+        "valid": "22:00",
         "temp": "images/hrrr_temp_f05.png",
         "gust": "images/hrrr_gust_f05.png",
         "radar": "images/hrrr_radar_f05.png",
@@ -51,7 +51,7 @@
       },
       {
         "fxx": 6,
-        "valid": "17:00",
+        "valid": "23:00",
         "temp": "images/hrrr_temp_f06.png",
         "gust": "images/hrrr_gust_f06.png",
         "radar": "images/hrrr_radar_f06.png",
@@ -59,7 +59,7 @@
       },
       {
         "fxx": 7,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/hrrr_temp_f07.png",
         "gust": "images/hrrr_gust_f07.png",
         "radar": "images/hrrr_radar_f07.png",
@@ -67,7 +67,7 @@
       },
       {
         "fxx": 8,
-        "valid": "19:00",
+        "valid": "01:00",
         "temp": "images/hrrr_temp_f08.png",
         "gust": "images/hrrr_gust_f08.png",
         "radar": "images/hrrr_radar_f08.png",
@@ -75,7 +75,7 @@
       },
       {
         "fxx": 9,
-        "valid": "20:00",
+        "valid": "02:00",
         "temp": "images/hrrr_temp_f09.png",
         "gust": "images/hrrr_gust_f09.png",
         "radar": "images/hrrr_radar_f09.png",
@@ -83,7 +83,7 @@
       },
       {
         "fxx": 10,
-        "valid": "21:00",
+        "valid": "03:00",
         "temp": "images/hrrr_temp_f10.png",
         "gust": "images/hrrr_gust_f10.png",
         "radar": "images/hrrr_radar_f10.png",
@@ -91,7 +91,7 @@
       },
       {
         "fxx": 11,
-        "valid": "22:00",
+        "valid": "04:00",
         "temp": "images/hrrr_temp_f11.png",
         "gust": "images/hrrr_gust_f11.png",
         "radar": "images/hrrr_radar_f11.png",
@@ -99,7 +99,7 @@
       },
       {
         "fxx": 12,
-        "valid": "23:00",
+        "valid": "05:00",
         "temp": "images/hrrr_temp_f12.png",
         "gust": "images/hrrr_gust_f12.png",
         "radar": "images/hrrr_radar_f12.png",
@@ -107,7 +107,7 @@
       },
       {
         "fxx": 13,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/hrrr_temp_f13.png",
         "gust": "images/hrrr_gust_f13.png",
         "radar": "images/hrrr_radar_f13.png",
@@ -115,7 +115,7 @@
       },
       {
         "fxx": 14,
-        "valid": "01:00",
+        "valid": "07:00",
         "temp": "images/hrrr_temp_f14.png",
         "gust": "images/hrrr_gust_f14.png",
         "radar": "images/hrrr_radar_f14.png",
@@ -123,7 +123,7 @@
       },
       {
         "fxx": 15,
-        "valid": "02:00",
+        "valid": "08:00",
         "temp": "images/hrrr_temp_f15.png",
         "gust": "images/hrrr_gust_f15.png",
         "radar": "images/hrrr_radar_f15.png",
@@ -131,7 +131,7 @@
       },
       {
         "fxx": 16,
-        "valid": "03:00",
+        "valid": "09:00",
         "temp": "images/hrrr_temp_f16.png",
         "gust": "images/hrrr_gust_f16.png",
         "radar": "images/hrrr_radar_f16.png",
@@ -139,7 +139,7 @@
       },
       {
         "fxx": 17,
-        "valid": "04:00",
+        "valid": "10:00",
         "temp": "images/hrrr_temp_f17.png",
         "gust": "images/hrrr_gust_f17.png",
         "radar": "images/hrrr_radar_f17.png",
@@ -147,7 +147,7 @@
       },
       {
         "fxx": 18,
-        "valid": "05:00",
+        "valid": "11:00",
         "temp": "images/hrrr_temp_f18.png",
         "gust": "images/hrrr_gust_f18.png",
         "radar": "images/hrrr_radar_f18.png",
@@ -155,42 +155,42 @@
       },
       {
         "fxx": 19,
-        "valid": "06:00"
+        "valid": "12:00"
       },
       {
         "fxx": 20,
-        "valid": "07:00"
+        "valid": "13:00"
       },
       {
         "fxx": 21,
-        "valid": "08:00"
+        "valid": "14:00"
       },
       {
         "fxx": 22,
-        "valid": "09:00"
+        "valid": "15:00"
       },
       {
         "fxx": 23,
-        "valid": "10:00"
+        "valid": "16:00"
       },
       {
         "fxx": 24,
-        "valid": "11:00"
+        "valid": "17:00"
       }
     ]
   },
   "gfs": {
-    "run_time": "2026-02-26 06z",
+    "run_time": "2026-02-26 12z",
     "frames": [
       {
         "fxx": 0,
-        "valid": "06:00",
+        "valid": "12:00",
         "gust": "images/gfs_gust_f00.png",
         "radar": "images/gfs_radar_f00.png"
       },
       {
         "fxx": 1,
-        "valid": "07:00",
+        "valid": "13:00",
         "gust": "images/gfs_gust_f01.png",
         "radar": "images/gfs_radar_f01.png",
         "precip": null,
@@ -198,7 +198,7 @@
       },
       {
         "fxx": 2,
-        "valid": "08:00",
+        "valid": "14:00",
         "gust": "images/gfs_gust_f02.png",
         "radar": "images/gfs_radar_f02.png",
         "precip": null,
@@ -206,7 +206,7 @@
       },
       {
         "fxx": 3,
-        "valid": "09:00",
+        "valid": "15:00",
         "gust": "images/gfs_gust_f03.png",
         "radar": "images/gfs_radar_f03.png",
         "precip": null,
@@ -214,7 +214,7 @@
       },
       {
         "fxx": 4,
-        "valid": "10:00",
+        "valid": "16:00",
         "gust": "images/gfs_gust_f04.png",
         "radar": "images/gfs_radar_f04.png",
         "precip": null,
@@ -222,7 +222,7 @@
       },
       {
         "fxx": 5,
-        "valid": "11:00",
+        "valid": "17:00",
         "gust": "images/gfs_gust_f05.png",
         "radar": "images/gfs_radar_f05.png",
         "precip": null,
@@ -230,7 +230,7 @@
       },
       {
         "fxx": 6,
-        "valid": "12:00",
+        "valid": "18:00",
         "gust": "images/gfs_gust_f06.png",
         "radar": "images/gfs_radar_f06.png",
         "precip": null,
@@ -238,7 +238,7 @@
       },
       {
         "fxx": 7,
-        "valid": "13:00",
+        "valid": "19:00",
         "gust": "images/gfs_gust_f07.png",
         "radar": "images/gfs_radar_f07.png",
         "precip": null,
@@ -246,7 +246,7 @@
       },
       {
         "fxx": 8,
-        "valid": "14:00",
+        "valid": "20:00",
         "gust": "images/gfs_gust_f08.png",
         "radar": "images/gfs_radar_f08.png",
         "precip": null,
@@ -254,7 +254,7 @@
       },
       {
         "fxx": 9,
-        "valid": "15:00",
+        "valid": "21:00",
         "gust": "images/gfs_gust_f09.png",
         "radar": "images/gfs_radar_f09.png",
         "precip": null,
@@ -262,7 +262,7 @@
       },
       {
         "fxx": 10,
-        "valid": "16:00",
+        "valid": "22:00",
         "gust": "images/gfs_gust_f10.png",
         "radar": "images/gfs_radar_f10.png",
         "precip": null,
@@ -270,7 +270,7 @@
       },
       {
         "fxx": 11,
-        "valid": "17:00",
+        "valid": "23:00",
         "gust": "images/gfs_gust_f11.png",
         "radar": "images/gfs_radar_f11.png",
         "precip": null,
@@ -278,7 +278,7 @@
       },
       {
         "fxx": 12,
-        "valid": "18:00",
+        "valid": "00:00",
         "gust": "images/gfs_gust_f12.png",
         "radar": "images/gfs_radar_f12.png",
         "precip": null,
@@ -286,7 +286,7 @@
       },
       {
         "fxx": 13,
-        "valid": "19:00",
+        "valid": "01:00",
         "gust": "images/gfs_gust_f13.png",
         "radar": "images/gfs_radar_f13.png",
         "precip": null,
@@ -294,7 +294,7 @@
       },
       {
         "fxx": 14,
-        "valid": "20:00",
+        "valid": "02:00",
         "gust": "images/gfs_gust_f14.png",
         "radar": "images/gfs_radar_f14.png",
         "precip": null,
@@ -302,7 +302,7 @@
       },
       {
         "fxx": 15,
-        "valid": "21:00",
+        "valid": "03:00",
         "gust": "images/gfs_gust_f15.png",
         "radar": "images/gfs_radar_f15.png",
         "precip": null,
@@ -310,7 +310,7 @@
       },
       {
         "fxx": 16,
-        "valid": "22:00",
+        "valid": "04:00",
         "gust": "images/gfs_gust_f16.png",
         "radar": "images/gfs_radar_f16.png",
         "precip": null,
@@ -318,7 +318,7 @@
       },
       {
         "fxx": 17,
-        "valid": "23:00",
+        "valid": "05:00",
         "gust": "images/gfs_gust_f17.png",
         "radar": "images/gfs_radar_f17.png",
         "precip": null,
@@ -326,7 +326,7 @@
       },
       {
         "fxx": 18,
-        "valid": "00:00",
+        "valid": "06:00",
         "gust": "images/gfs_gust_f18.png",
         "radar": "images/gfs_radar_f18.png",
         "precip": null,
@@ -334,7 +334,7 @@
       },
       {
         "fxx": 19,
-        "valid": "01:00",
+        "valid": "07:00",
         "gust": "images/gfs_gust_f19.png",
         "radar": "images/gfs_radar_f19.png",
         "precip": null,
@@ -342,7 +342,7 @@
       },
       {
         "fxx": 20,
-        "valid": "02:00",
+        "valid": "08:00",
         "gust": "images/gfs_gust_f20.png",
         "radar": "images/gfs_radar_f20.png",
         "precip": null,
@@ -350,7 +350,7 @@
       },
       {
         "fxx": 21,
-        "valid": "03:00",
+        "valid": "09:00",
         "gust": "images/gfs_gust_f21.png",
         "radar": "images/gfs_radar_f21.png",
         "precip": null,
@@ -358,7 +358,7 @@
       },
       {
         "fxx": 22,
-        "valid": "04:00",
+        "valid": "10:00",
         "gust": "images/gfs_gust_f22.png",
         "radar": "images/gfs_radar_f22.png",
         "precip": null,
@@ -366,7 +366,7 @@
       },
       {
         "fxx": 23,
-        "valid": "05:00",
+        "valid": "11:00",
         "gust": "images/gfs_gust_f23.png",
         "radar": "images/gfs_radar_f23.png",
         "precip": null,
@@ -374,7 +374,7 @@
       },
       {
         "fxx": 24,
-        "valid": "06:00",
+        "valid": "12:00",
         "gust": "images/gfs_gust_f24.png",
         "radar": "images/gfs_radar_f24.png",
         "precip": null,
@@ -383,18 +383,18 @@
     ]
   },
   "nam": {
-    "run_time": "2026-02-26 06z",
+    "run_time": "2026-02-26 12z",
     "frames": [
       {
         "fxx": 0,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/nam_temp_f00.png",
         "gust": "images/nam_gust_f00.png",
         "radar": "images/nam_radar_f00.png"
       },
       {
         "fxx": 1,
-        "valid": "07:00",
+        "valid": "13:00",
         "temp": "images/nam_temp_f01.png",
         "gust": "images/nam_gust_f01.png",
         "radar": "images/nam_radar_f01.png",
@@ -402,7 +402,7 @@
       },
       {
         "fxx": 2,
-        "valid": "08:00",
+        "valid": "14:00",
         "temp": "images/nam_temp_f02.png",
         "gust": "images/nam_gust_f02.png",
         "radar": "images/nam_radar_f02.png",
@@ -410,7 +410,7 @@
       },
       {
         "fxx": 3,
-        "valid": "09:00",
+        "valid": "15:00",
         "temp": "images/nam_temp_f03.png",
         "gust": "images/nam_gust_f03.png",
         "radar": "images/nam_radar_f03.png",
@@ -418,7 +418,7 @@
       },
       {
         "fxx": 4,
-        "valid": "10:00",
+        "valid": "16:00",
         "temp": "images/nam_temp_f04.png",
         "gust": "images/nam_gust_f04.png",
         "radar": "images/nam_radar_f04.png",
@@ -426,7 +426,7 @@
       },
       {
         "fxx": 5,
-        "valid": "11:00",
+        "valid": "17:00",
         "temp": "images/nam_temp_f05.png",
         "gust": "images/nam_gust_f05.png",
         "radar": "images/nam_radar_f05.png",
@@ -434,7 +434,7 @@
       },
       {
         "fxx": 6,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/nam_temp_f06.png",
         "gust": "images/nam_gust_f06.png",
         "radar": "images/nam_radar_f06.png",
@@ -442,7 +442,7 @@
       },
       {
         "fxx": 7,
-        "valid": "13:00",
+        "valid": "19:00",
         "temp": "images/nam_temp_f07.png",
         "gust": "images/nam_gust_f07.png",
         "radar": "images/nam_radar_f07.png",
@@ -450,7 +450,7 @@
       },
       {
         "fxx": 8,
-        "valid": "14:00",
+        "valid": "20:00",
         "temp": "images/nam_temp_f08.png",
         "gust": "images/nam_gust_f08.png",
         "radar": "images/nam_radar_f08.png",
@@ -458,7 +458,7 @@
       },
       {
         "fxx": 9,
-        "valid": "15:00",
+        "valid": "21:00",
         "temp": "images/nam_temp_f09.png",
         "gust": "images/nam_gust_f09.png",
         "radar": "images/nam_radar_f09.png",
@@ -466,7 +466,7 @@
       },
       {
         "fxx": 10,
-        "valid": "16:00",
+        "valid": "22:00",
         "temp": "images/nam_temp_f10.png",
         "gust": "images/nam_gust_f10.png",
         "radar": "images/nam_radar_f10.png",
@@ -474,7 +474,7 @@
       },
       {
         "fxx": 11,
-        "valid": "17:00",
+        "valid": "23:00",
         "temp": "images/nam_temp_f11.png",
         "gust": "images/nam_gust_f11.png",
         "radar": "images/nam_radar_f11.png",
@@ -482,7 +482,7 @@
       },
       {
         "fxx": 12,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/nam_temp_f12.png",
         "gust": "images/nam_gust_f12.png",
         "radar": "images/nam_radar_f12.png",
@@ -490,7 +490,7 @@
       },
       {
         "fxx": 13,
-        "valid": "19:00",
+        "valid": "01:00",
         "temp": "images/nam_temp_f13.png",
         "gust": "images/nam_gust_f13.png",
         "radar": "images/nam_radar_f13.png",
@@ -498,7 +498,7 @@
       },
       {
         "fxx": 14,
-        "valid": "20:00",
+        "valid": "02:00",
         "temp": "images/nam_temp_f14.png",
         "gust": "images/nam_gust_f14.png",
         "radar": "images/nam_radar_f14.png",
@@ -506,7 +506,7 @@
       },
       {
         "fxx": 15,
-        "valid": "21:00",
+        "valid": "03:00",
         "temp": "images/nam_temp_f15.png",
         "gust": "images/nam_gust_f15.png",
         "radar": "images/nam_radar_f15.png",
@@ -514,7 +514,7 @@
       },
       {
         "fxx": 16,
-        "valid": "22:00",
+        "valid": "04:00",
         "temp": "images/nam_temp_f16.png",
         "gust": "images/nam_gust_f16.png",
         "radar": "images/nam_radar_f16.png",
@@ -522,7 +522,7 @@
       },
       {
         "fxx": 17,
-        "valid": "23:00",
+        "valid": "05:00",
         "temp": "images/nam_temp_f17.png",
         "gust": "images/nam_gust_f17.png",
         "radar": "images/nam_radar_f17.png",
@@ -530,7 +530,7 @@
       },
       {
         "fxx": 18,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/nam_temp_f18.png",
         "gust": "images/nam_gust_f18.png",
         "radar": "images/nam_radar_f18.png",
@@ -538,7 +538,7 @@
       },
       {
         "fxx": 19,
-        "valid": "01:00",
+        "valid": "07:00",
         "temp": "images/nam_temp_f19.png",
         "gust": "images/nam_gust_f19.png",
         "radar": "images/nam_radar_f19.png",
@@ -546,7 +546,7 @@
       },
       {
         "fxx": 20,
-        "valid": "02:00",
+        "valid": "08:00",
         "temp": "images/nam_temp_f20.png",
         "gust": "images/nam_gust_f20.png",
         "radar": "images/nam_radar_f20.png",
@@ -554,7 +554,7 @@
       },
       {
         "fxx": 21,
-        "valid": "03:00",
+        "valid": "09:00",
         "temp": "images/nam_temp_f21.png",
         "gust": "images/nam_gust_f21.png",
         "radar": "images/nam_radar_f21.png",
@@ -562,7 +562,7 @@
       },
       {
         "fxx": 22,
-        "valid": "04:00",
+        "valid": "10:00",
         "temp": "images/nam_temp_f22.png",
         "gust": "images/nam_gust_f22.png",
         "radar": "images/nam_radar_f22.png",
@@ -570,7 +570,7 @@
       },
       {
         "fxx": 23,
-        "valid": "05:00",
+        "valid": "11:00",
         "temp": "images/nam_temp_f23.png",
         "gust": "images/nam_gust_f23.png",
         "radar": "images/nam_radar_f23.png",
@@ -578,7 +578,7 @@
       },
       {
         "fxx": 24,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/nam_temp_f24.png",
         "gust": "images/nam_gust_f24.png",
         "radar": "images/nam_radar_f24.png",
@@ -587,18 +587,18 @@
     ]
   },
   "nam3k": {
-    "run_time": "2026-02-26 06z",
+    "run_time": "2026-02-26 12z",
     "frames": [
       {
         "fxx": 0,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/nam3k_temp_f00.png",
         "gust": "images/nam3k_gust_f00.png",
         "radar": "images/nam3k_radar_f00.png"
       },
       {
         "fxx": 1,
-        "valid": "07:00",
+        "valid": "13:00",
         "temp": "images/nam3k_temp_f01.png",
         "gust": "images/nam3k_gust_f01.png",
         "radar": "images/nam3k_radar_f01.png",
@@ -606,7 +606,7 @@
       },
       {
         "fxx": 2,
-        "valid": "08:00",
+        "valid": "14:00",
         "temp": "images/nam3k_temp_f02.png",
         "gust": "images/nam3k_gust_f02.png",
         "radar": "images/nam3k_radar_f02.png",
@@ -614,7 +614,7 @@
       },
       {
         "fxx": 3,
-        "valid": "09:00",
+        "valid": "15:00",
         "temp": "images/nam3k_temp_f03.png",
         "gust": "images/nam3k_gust_f03.png",
         "radar": "images/nam3k_radar_f03.png",
@@ -622,7 +622,7 @@
       },
       {
         "fxx": 4,
-        "valid": "10:00",
+        "valid": "16:00",
         "temp": "images/nam3k_temp_f04.png",
         "gust": "images/nam3k_gust_f04.png",
         "radar": "images/nam3k_radar_f04.png",
@@ -630,7 +630,7 @@
       },
       {
         "fxx": 5,
-        "valid": "11:00",
+        "valid": "17:00",
         "temp": "images/nam3k_temp_f05.png",
         "gust": "images/nam3k_gust_f05.png",
         "radar": "images/nam3k_radar_f05.png",
@@ -638,7 +638,7 @@
       },
       {
         "fxx": 6,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/nam3k_temp_f06.png",
         "gust": "images/nam3k_gust_f06.png",
         "radar": "images/nam3k_radar_f06.png",
@@ -646,7 +646,7 @@
       },
       {
         "fxx": 7,
-        "valid": "13:00",
+        "valid": "19:00",
         "temp": "images/nam3k_temp_f07.png",
         "gust": "images/nam3k_gust_f07.png",
         "radar": "images/nam3k_radar_f07.png",
@@ -654,7 +654,7 @@
       },
       {
         "fxx": 8,
-        "valid": "14:00",
+        "valid": "20:00",
         "temp": "images/nam3k_temp_f08.png",
         "gust": "images/nam3k_gust_f08.png",
         "radar": "images/nam3k_radar_f08.png",
@@ -662,7 +662,7 @@
       },
       {
         "fxx": 9,
-        "valid": "15:00",
+        "valid": "21:00",
         "temp": "images/nam3k_temp_f09.png",
         "gust": "images/nam3k_gust_f09.png",
         "radar": "images/nam3k_radar_f09.png",
@@ -670,7 +670,7 @@
       },
       {
         "fxx": 10,
-        "valid": "16:00",
+        "valid": "22:00",
         "temp": "images/nam3k_temp_f10.png",
         "gust": "images/nam3k_gust_f10.png",
         "radar": "images/nam3k_radar_f10.png",
@@ -678,7 +678,7 @@
       },
       {
         "fxx": 11,
-        "valid": "17:00",
+        "valid": "23:00",
         "temp": "images/nam3k_temp_f11.png",
         "gust": "images/nam3k_gust_f11.png",
         "radar": "images/nam3k_radar_f11.png",
@@ -686,7 +686,7 @@
       },
       {
         "fxx": 12,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/nam3k_temp_f12.png",
         "gust": "images/nam3k_gust_f12.png",
         "radar": "images/nam3k_radar_f12.png",
@@ -694,7 +694,7 @@
       },
       {
         "fxx": 13,
-        "valid": "19:00",
+        "valid": "01:00",
         "temp": "images/nam3k_temp_f13.png",
         "gust": "images/nam3k_gust_f13.png",
         "radar": "images/nam3k_radar_f13.png",
@@ -702,7 +702,7 @@
       },
       {
         "fxx": 14,
-        "valid": "20:00",
+        "valid": "02:00",
         "temp": "images/nam3k_temp_f14.png",
         "gust": "images/nam3k_gust_f14.png",
         "radar": "images/nam3k_radar_f14.png",
@@ -710,7 +710,7 @@
       },
       {
         "fxx": 15,
-        "valid": "21:00",
+        "valid": "03:00",
         "temp": "images/nam3k_temp_f15.png",
         "gust": "images/nam3k_gust_f15.png",
         "radar": "images/nam3k_radar_f15.png",
@@ -718,7 +718,7 @@
       },
       {
         "fxx": 16,
-        "valid": "22:00",
+        "valid": "04:00",
         "temp": "images/nam3k_temp_f16.png",
         "gust": "images/nam3k_gust_f16.png",
         "radar": "images/nam3k_radar_f16.png",
@@ -726,7 +726,7 @@
       },
       {
         "fxx": 17,
-        "valid": "23:00",
+        "valid": "05:00",
         "temp": "images/nam3k_temp_f17.png",
         "gust": "images/nam3k_gust_f17.png",
         "radar": "images/nam3k_radar_f17.png",
@@ -734,7 +734,7 @@
       },
       {
         "fxx": 18,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/nam3k_temp_f18.png",
         "gust": "images/nam3k_gust_f18.png",
         "radar": "images/nam3k_radar_f18.png",
@@ -742,7 +742,7 @@
       },
       {
         "fxx": 19,
-        "valid": "01:00",
+        "valid": "07:00",
         "temp": "images/nam3k_temp_f19.png",
         "gust": "images/nam3k_gust_f19.png",
         "radar": "images/nam3k_radar_f19.png",
@@ -750,7 +750,7 @@
       },
       {
         "fxx": 20,
-        "valid": "02:00",
+        "valid": "08:00",
         "temp": "images/nam3k_temp_f20.png",
         "gust": "images/nam3k_gust_f20.png",
         "radar": "images/nam3k_radar_f20.png",
@@ -758,7 +758,7 @@
       },
       {
         "fxx": 21,
-        "valid": "03:00",
+        "valid": "09:00",
         "temp": "images/nam3k_temp_f21.png",
         "gust": "images/nam3k_gust_f21.png",
         "radar": "images/nam3k_radar_f21.png",
@@ -766,7 +766,7 @@
       },
       {
         "fxx": 22,
-        "valid": "04:00",
+        "valid": "10:00",
         "temp": "images/nam3k_temp_f22.png",
         "gust": "images/nam3k_gust_f22.png",
         "radar": "images/nam3k_radar_f22.png",
@@ -774,7 +774,7 @@
       },
       {
         "fxx": 23,
-        "valid": "05:00",
+        "valid": "11:00",
         "temp": "images/nam3k_temp_f23.png",
         "gust": "images/nam3k_gust_f23.png",
         "radar": "images/nam3k_radar_f23.png",
@@ -782,7 +782,7 @@
       },
       {
         "fxx": 24,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/nam3k_temp_f24.png",
         "gust": "images/nam3k_gust_f24.png",
         "radar": "images/nam3k_radar_f24.png",
