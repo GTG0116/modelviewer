@@ -67,11 +67,14 @@ MODELS = {
     },
 
     # ── NOAA AI / Experimental ───────────────────────────────────────────────
-    # Project EAGLE – NOAA's AI global forecast system (aigfs)
+    # Project EAGLE – NOAA's AI global forecast system
+    # No 'product' here so Herbie uses the aigfs template's own default.
+    # Specifying a wrong product (e.g. 'pgrb2.0p25') causes the URL to mismatch
+    # and the probe to always return False even when data is present.
     'aigfs': {
-        'model': 'aigfs', 'product': 'pgrb2.0p25',
+        'model': 'aigfs',
         'step': 6, 'max_hours': 120, 'cycle_hrs': 6,
-        'priority': ['nomads'],
+        'priority': ['nomads', 'aws'],
         'display_name': 'AIGFS (EAGLE)',
     },
     # AI GEFS – AI-enhanced ensemble control member
@@ -84,11 +87,15 @@ MODELS = {
     },
 
     # ── ECMWF Open Data ──────────────────────────────────────────────────────
+    # No 'priority' key for ECMWF models – Herbie's IFS/AIFS templates define
+    # their own source URLs (ECMWF open-data S3 / REST endpoint). Passing an
+    # explicit priority list that doesn't match those source names causes
+    # H.grib to always return None, which breaks the availability probe.
+
     # IFS deterministic (HRES)
     'ecmwf': {
         'model': 'ifs', 'product': 'oper',
         'step': 6, 'max_hours': 120, 'cycle_hrs': 12,
-        'priority': ['ecmwf'],
         'skip_vars': ['radar', 'snow'],
         'display_name': 'ECMWF IFS',
     },
@@ -96,15 +103,13 @@ MODELS = {
     'ecmwf_aifs': {
         'model': 'aifs', 'product': 'oper',
         'step': 6, 'max_hours': 120, 'cycle_hrs': 12,
-        'priority': ['ecmwf'],
         'skip_vars': ['radar', 'gust', 'snow'],
         'display_name': 'ECMWF AIFS',
     },
-    # IFS Ensemble (ENS)
+    # IFS Ensemble (ENS) – control member
     'ecmwf_ens': {
         'model': 'ifs', 'product': 'enfo',
         'step': 6, 'max_hours': 120, 'cycle_hrs': 12,
-        'priority': ['ecmwf'],
         'skip_vars': ['radar', 'snow'],
         'display_name': 'ECMWF ENS',
     },
@@ -112,7 +117,6 @@ MODELS = {
     'ecmwf_ai_ens': {
         'model': 'aifs', 'product': 'enfo',
         'step': 6, 'max_hours': 120, 'cycle_hrs': 12,
-        'priority': ['ecmwf'],
         'skip_vars': ['radar', 'gust', 'snow'],
         'display_name': 'ECMWF AI ENS',
     },
@@ -141,9 +145,9 @@ VARIABLES = {
         'unit': 'dBZ', 'accum': False,
     },
     'precip': {
-        'name': '1-hr Total Precip',
+        'name': 'Total Precip (accum)',
         'search': ':APCP:',
-        'cmap': 'YlGnBu', 'vmin': 0, 'vmax': 1.0,
+        'cmap': 'YlGnBu', 'vmin': 0, 'vmax': 30.0,
         'unit': 'in', 'accum': True,
     },
     'snow': {
@@ -187,11 +191,29 @@ def make_herbie(config, run_dt, fxx):
 
 
 def probe_available(config, run_dt, fxx=0):
-    """Return True if data exists for run_dt / fxx, False otherwise."""
+    """
+    Return True if data exists for run_dt / fxx, False otherwise.
+
+    Strategy:
+      1. H.grib is not None  → works for all NOAA models (direct GRIB URL)
+      2. H.inventory() succeeds → fallback for ECMWF-style models that use
+         a REST/API source where grib is None until the file is downloaded
+    """
     try:
         H = make_herbie(config, run_dt, fxx)
-        return H.grib is not None
-    except Exception:
+        if H.grib is not None:
+            return True
+        # Fallback: attempt to read the index/inventory
+        try:
+            inv = H.inventory()
+            return inv is not None and len(inv) > 0
+        except Exception:
+            return False
+    except Exception as e:
+        msg = str(e).lower()
+        # Surface Herbie template / unknown-model errors so they're visible in logs
+        if any(kw in msg for kw in ('template', 'unknown model', 'no attribute', 'herbie')):
+            print(f'    ⚠ Herbie template error ({config["model"]}): {e}')
         return False
 
 
@@ -219,8 +241,17 @@ def create_plot(model_key, var_key, data, lons, lats, init_time, valid_time, fxx
         ax.add_feature(cfeature.STATES.with_scale('50m'), linewidth=0.5)
         ax.add_feature(cfeature.BORDERS, linestyle=':')
 
+        # Models on a regular lat-lon grid (GFS, GEFS, ECMWF, …) return 1-D
+        # coordinate arrays from cfgrib; pcolormesh needs 2-D arrays that match
+        # the data shape, so meshgrid them when necessary.
+        lons_arr = np.asarray(lons)
+        lats_arr = np.asarray(lats)
+        data_arr = np.asarray(data)
+        if lons_arr.ndim == 1 and lats_arr.ndim == 1:
+            lons_arr, lats_arr = np.meshgrid(lons_arr, lats_arr)
+
         mesh = ax.pcolormesh(
-            lons, lats, data,
+            lons_arr, lats_arr, data_arr,
             transform=ccrs.PlateCarree(),
             cmap=cmap, vmin=vmin, vmax=vmax, shading='auto',
         )
@@ -275,11 +306,14 @@ def process_frame(model_key, config, run_dt, fxx):
                 t_f = (ds[t_var] - 273.15) * 9 / 5 + 32
                 apparent = calculate_apparent_temp(t_f.values, ws_mph.values)
 
-                p1 = create_plot(model_key, 'wind', ws_mph, ds.longitude, ds.latitude,
+                lons_w = ds.longitude
+                lats_w = ds.latitude
+
+                p1 = create_plot(model_key, 'wind', ws_mph, lons_w, lats_w,
                                  run_dt, valid_time, fxx, 'ocean_r', 0, 40, 'Wind Speed (mph)')
                 frame_data['wind'] = p1
 
-                p2 = create_plot(model_key, 'feelslike', apparent, ds.longitude, ds.latitude,
+                p2 = create_plot(model_key, 'feelslike', apparent, lons_w, lats_w,
                                  run_dt, valid_time, fxx, 'turbo', -20, 110, 'Apparent Temp (°F)')
                 frame_data['feelslike'] = p2
         except Exception as e:
@@ -294,7 +328,15 @@ def process_frame(model_key, config, run_dt, fxx):
 
         try:
             ds = H.xarray(recipe['search'], verbose=False)
-            if ds is None or len(ds) == 0:
+            if ds is None:
+                continue
+            # H.xarray() may return a list when multiple GRIB messages match
+            # (e.g. GFS packs some variables across levels separately)
+            if isinstance(ds, list):
+                if not ds:
+                    continue
+                ds = xr.merge(ds, compat='override') if len(ds) > 1 else ds[0]
+            if not ds.data_vars:
                 continue
             var_name = list(ds.data_vars)[0]
             data = ds[var_name]
@@ -310,7 +352,8 @@ def process_frame(model_key, config, run_dt, fxx):
                             run_dt, valid_time, fxx,
                             recipe['cmap'], recipe['vmin'], recipe['vmax'], recipe['name'])
             frame_data[var_key] = p
-        except Exception:
+        except Exception as e:
+            print(f"      ! {var_key} skipped: {e}")
             continue
 
     return frame_data
