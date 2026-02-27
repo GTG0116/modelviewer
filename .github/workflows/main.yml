@@ -2,7 +2,8 @@ name: Update Model Site
 
 on:
   schedule:
-    - cron: '0 0,6,12,18 * * *'
+    # Run every hour – smart frame detection means only new frames are processed
+    - cron: '15 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -11,6 +12,8 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 300   # 5-hour ceiling; smart detection keeps runs short
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -20,45 +23,33 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install System Dependencies
+      - name: Install system dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libeccodes-dev
+          sudo apt-get update -q
+          sudo apt-get install -y libeccodes-dev libeccodes-tools
 
-      - name: Install Python Libraries
+      - name: Install Python dependencies
         run: |
-          pip install herbie-data xarray cfgrib matplotlib cartopy scipy numpy
+          pip install --upgrade pip
+          pip install herbie-data xarray cfgrib matplotlib cartopy scipy numpy ecmwf-opendata
 
-      - name: Run Plotting Script
+      - name: Run plotting script
         run: python scripts/plot_models.py
 
-      - name: Prepare Website Files
+      - name: Prepare website files
         run: |
-          # Ensure the site folder exists
           mkdir -p site/images
-          
-          # Check if index.html exists in scripts, copy it. 
-          # If not, create a simple one so the site doesn't 404.
-          if [ -f scripts/index.html ]; then
-            cp scripts/index.html site/index.html
-          else
-            echo "<html><body><h1>Weather Data Loaded</h1><p>Check site/status.json for data.</p></body></html>" > site/index.html
-          fi
+          # scripts/index.html is the source of truth – always deploy it
+          cp scripts/index.html site/index.html
 
-      # --- STEP 1: Push Images to Main Branch (So you can see them) ---
-      - name: Commit to Main Branch
+      - name: Commit updated plots & status to main
         run: |
-          git config --global user.name "WeatherBot"
+          git config --global user.name  "WeatherBot"
           git config --global user.email "bot@noreply.github.com"
-          
-          # Force add the 'site' folder
           git add site/
-          
-          # Commit and Push
-          git commit -m "Update weather plots [skip ci]" || echo "No changes to commit"
+          git commit -m "Update weather plots [skip ci]" || echo "Nothing to commit"
           git push
 
-      # --- STEP 2: Deploy to GitHub Pages (So the website works) ---
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
