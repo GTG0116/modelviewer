@@ -1,1 +1,498 @@
-<html><body><h1>Weather Data Loaded</h1><p>Check site/status.json for data.</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northeast Weather Model Viewer</title>
+  <style>
+    /* ── Base ───────────────────────────────────────────────────────────── */
+    :root {
+      --bg:           #0d1117;
+      --surface:      #161b22;
+      --surface2:     #1c2128;
+      --border:       #30363d;
+      --text:         #e6edf3;
+      --muted:        #7d8590;
+      --accent:       #388bfd;
+      --accent-hover: #58a6ff;
+      --green:        #3fb950;
+      --yellow:       #d29922;
+      --red:          #f85149;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    #status-line {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── Controls bar ────────────────────────────────────────────────────── */
+    .controls {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Variable tabs */
+    .var-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .var-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 11px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: border-color .15s, color .15s, background .15s;
+      white-space: nowrap;
+    }
+    .var-btn:hover  { border-color: var(--accent-hover); color: var(--text); }
+    .var-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Playback controls + slider */
+    .time-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .ctrl-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: border-color .15s;
+    }
+    .ctrl-btn:hover { border-color: var(--accent); }
+
+    #frame-slider {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    #time-display {
+      font-size: 12px;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      min-width: 130px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* ── Model Grid ──────────────────────────────────────────────────────── */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 12px;
+      padding: 14px 18px;
+    }
+
+    .model-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 7px 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .card-name {
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .card-meta {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .card-img-wrap {
+      position: relative;
+      background: var(--bg);
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .card-img-wrap .no-img {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card-footer {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 4px 11px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .card-unavailable { opacity: 0.45; }
+
+    /* ── Spinner / loading ──────────────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #loading-msg {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌦 Northeast Weather Model Viewer</h1>
+  <span id="status-line">Loading data …</span>
+</header>
+
+<div class="controls">
+  <div class="var-tabs" id="var-tabs">
+    <!-- populated by JS -->
+  </div>
+  <div class="time-controls">
+    <button class="ctrl-btn" id="btn-prev" title="Previous frame">&#9664;</button>
+    <button class="ctrl-btn" id="btn-play" title="Play / Pause">&#9654;</button>
+    <button class="ctrl-btn" id="btn-next" title="Next frame">&#9654;&#9654;</button>
+    <input type="range" id="frame-slider" min="0" max="0" value="0" />
+    <div id="time-display">─</div>
+  </div>
+</div>
+
+<div id="loading-msg"><span class="spinner"></span>Fetching model status …</div>
+<div id="grid"></div>
+
+<script>
+// ── Constants ──────────────────────────────────────────────────────────────
+const MODEL_ORDER = [
+  'hrrr', 'rap', 'gfs', 'nam', 'nam3k',
+  'gefs', 'aigfs', 'ai_gefs',
+  'ecmwf', 'ecmwf_aifs', 'ecmwf_ens', 'ecmwf_ai_ens',
+];
+
+const VAR_LABELS = {
+  temp:     'Temperature',
+  feelslike:'Feels Like',
+  wind:     'Wind Speed',
+  gust:     'Wind Gusts',
+  radar:    'Radar',
+  precip:   'Precip',
+  snow:     'Snow',
+};
+
+const VAR_ORDER = ['temp', 'feelslike', 'wind', 'gust', 'radar', 'precip', 'snow'];
+
+// ── State ──────────────────────────────────────────────────────────────────
+let status       = {};
+let currentVar   = 'temp';
+let frameIndex   = 0;    // position in the per-model filtered frames array
+let maxFrames    = 0;
+let playing      = false;
+let playTimer    = null;
+
+// ── Fetch status.json ─────────────────────────────────────────────────────
+async function loadStatus() {
+  try {
+    const res = await fetch('status.json?_=' + Date.now());
+    if (!res.ok) throw new Error(res.statusText);
+    status = await res.json();
+    init();
+    document.getElementById('loading-msg').style.display = 'none';
+    document.getElementById('status-line').textContent =
+      'Updated: ' + new Date().toUTCString();
+  } catch (err) {
+    document.getElementById('loading-msg').innerHTML =
+      '⚠️ Could not load status.json — ' + err.message;
+  }
+}
+
+// ── Initialise after data loads ───────────────────────────────────────────
+function init() {
+  const vars = discoverVars();
+  buildVarTabs(vars);
+
+  // Restore previous var if still available
+  if (!vars.has(currentVar)) currentVar = VAR_ORDER.find(v => vars.has(v)) || [...vars][0];
+  document.querySelectorAll('.var-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.var === currentVar));
+
+  buildGrid();
+  updateSlider();
+  renderAllCards();
+}
+
+// Collect every variable key that appears with a non-null value in at least one model/frame
+function discoverVars() {
+  const found = new Set();
+  for (const md of Object.values(status)) {
+    if (!md) continue;
+    for (const frame of (md.frames || [])) {
+      for (const [k, v] of Object.entries(frame)) {
+        if (!['fxx', 'valid'].includes(k) && v != null) found.add(k);
+      }
+    }
+  }
+  return found;
+}
+
+// ── Variable tabs ─────────────────────────────────────────────────────────
+function buildVarTabs(vars) {
+  const container = document.getElementById('var-tabs');
+  container.innerHTML = '';
+  const ordered = [
+    ...VAR_ORDER.filter(v => vars.has(v)),
+    ...[...vars].filter(v => !VAR_ORDER.includes(v)),
+  ];
+  for (const v of ordered) {
+    const btn = document.createElement('button');
+    btn.className = 'var-btn' + (v === currentVar ? ' active' : '');
+    btn.dataset.var = v;
+    btn.textContent = VAR_LABELS[v] || v;
+    btn.addEventListener('click', () => selectVar(v));
+    container.appendChild(btn);
+  }
+}
+
+function selectVar(v) {
+  currentVar = v;
+  document.querySelectorAll('.var-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.var === v));
+  frameIndex = 0;
+  updateSlider();
+  renderAllCards();
+}
+
+// ── Frame slider ──────────────────────────────────────────────────────────
+function framesForModel(md) {
+  if (!md || !md.frames) return [];
+  return md.frames.filter(f => f[currentVar] != null);
+}
+
+function updateSlider() {
+  maxFrames = Math.max(0, ...Object.values(status).map(md => framesForModel(md).length));
+  const slider = document.getElementById('frame-slider');
+  slider.max = Math.max(0, maxFrames - 1);
+  frameIndex  = Math.min(frameIndex, maxFrames - 1);
+  slider.value = frameIndex;
+  updateTimeDisplay();
+}
+
+function updateTimeDisplay() {
+  let text = `Frame ${frameIndex + 1} / ${maxFrames}`;
+  for (const md of Object.values(status)) {
+    const frames = framesForModel(md);
+    const f = frames[frameIndex];
+    if (f) {
+      text = `f${String(f.fxx).padStart(2, '0')}  ·  ${f.valid}Z`;
+      break;
+    }
+  }
+  document.getElementById('time-display').textContent = text;
+}
+
+// ── Build card shell for each model ──────────────────────────────────────
+function orderedModelKeys() {
+  const keys = Object.keys(status);
+  const ordered = MODEL_ORDER.filter(k => keys.includes(k));
+  keys.forEach(k => { if (!ordered.includes(k)) ordered.push(k); });
+  return ordered;
+}
+
+function buildGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  for (const key of orderedModelKeys()) {
+    const md = status[key];
+    const name = md?.display_name || key.toUpperCase();
+    const hasData = md && md.frames && md.frames.length > 0;
+
+    const card = document.createElement('div');
+    card.className = 'model-card' + (hasData ? '' : ' card-unavailable');
+    card.id = 'card-' + key;
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-name">${name}</span>
+        <div class="card-meta" id="meta-${key}">
+          ${hasData ? `Run: ${md.run_time || '─'}<br><span id="valid-${key}">─</span>` : 'No data'}
+        </div>
+      </div>
+      <div class="card-img-wrap" id="wrap-${key}">
+        ${hasData
+          ? `<img id="img-${key}" src="" alt="${name}" />`
+          : `<div class="no-img">Data not yet available</div>`}
+      </div>
+      ${hasData ? `<div class="card-footer" id="footer-${key}"></div>` : ''}
+    `;
+    grid.appendChild(card);
+  }
+}
+
+// ── Render images for current var + frameIndex ────────────────────────────
+function renderAllCards() {
+  for (const key of orderedModelKeys()) {
+    const md    = status[key];
+    const img   = document.getElementById('img-' + key);
+    const valid = document.getElementById('valid-' + key);
+    const foot  = document.getElementById('footer-' + key);
+    if (!img) continue;
+
+    const frames = framesForModel(md);
+    const frame  = frames[Math.min(frameIndex, frames.length - 1)];
+
+    if (frame && frame[currentVar]) {
+      img.src = frame[currentVar] + '?_=' + Date.now();
+      img.style.display = '';
+      if (valid) valid.textContent = 'Valid: ' + frame.valid + 'Z';
+      if (foot)  foot.textContent  = `f${String(frame.fxx).padStart(2,'0')}  ·  ${frame.valid}Z  (init ${md.run_time})`;
+    } else {
+      img.src = '';
+      img.style.display = 'none';
+      const wrap = document.getElementById('wrap-' + key);
+      // Show placeholder only if no image slot is there already
+      let placeholder = wrap.querySelector('.no-img');
+      if (!placeholder) {
+        placeholder = document.createElement('div');
+        placeholder.className = 'no-img';
+        wrap.appendChild(placeholder);
+      }
+      placeholder.textContent = frames.length
+        ? `No "${VAR_LABELS[currentVar] || currentVar}" data for this frame`
+        : 'No data available';
+      if (valid) valid.textContent = '─';
+      if (foot)  foot.textContent  = '';
+    }
+  }
+  updateTimeDisplay();
+}
+
+// ── Playback controls ─────────────────────────────────────────────────────
+function stepFrame(delta) {
+  frameIndex = Math.max(0, Math.min(maxFrames - 1, frameIndex + delta));
+  document.getElementById('frame-slider').value = frameIndex;
+  renderAllCards();
+}
+
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('btn-play').innerHTML = playing ? '&#9646;&#9646;' : '&#9654;';
+  if (playing) {
+    playTimer = setInterval(() => {
+      frameIndex = (frameIndex + 1) % Math.max(1, maxFrames);
+      document.getElementById('frame-slider').value = frameIndex;
+      renderAllCards();
+    }, 500);
+  } else {
+    clearInterval(playTimer);
+  }
+}
+
+document.getElementById('btn-prev').addEventListener('click', () => stepFrame(-1));
+document.getElementById('btn-next').addEventListener('click', () => stepFrame(+1));
+document.getElementById('btn-play').addEventListener('click', togglePlay);
+document.getElementById('frame-slider').addEventListener('input', e => {
+  frameIndex = parseInt(e.target.value, 10);
+  renderAllCards();
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  stepFrame(-1);
+  if (e.key === 'ArrowRight') stepFrame(+1);
+  if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+});
+
+// ── Auto-refresh every 10 minutes ─────────────────────────────────────────
+setInterval(loadStatus, 10 * 60 * 1000);
+
+// ── Bootstrap ─────────────────────────────────────────────────────────────
+loadStatus();
+</script>
+</body>
+</html>
