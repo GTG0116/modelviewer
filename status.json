@@ -1,18 +1,18 @@
 {
   "hrrr": {
-    "run_time": "2026-03-01 20z",
+    "run_time": "2026-03-01 21z",
     "display_name": "HRRR",
     "frames": [
       {
         "fxx": 0,
-        "valid": "20:00",
+        "valid": "21:00",
         "temp": "images/hrrr_temp_f00.png",
         "gust": "images/hrrr_gust_f00.png",
         "radar": "images/hrrr_radar_f00.png"
       },
       {
         "fxx": 1,
-        "valid": "21:00",
+        "valid": "22:00",
         "temp": "images/hrrr_temp_f01.png",
         "gust": "images/hrrr_gust_f01.png",
         "radar": "images/hrrr_radar_f01.png",
@@ -21,7 +21,7 @@
       },
       {
         "fxx": 2,
-        "valid": "22:00",
+        "valid": "23:00",
         "temp": "images/hrrr_temp_f02.png",
         "gust": "images/hrrr_gust_f02.png",
         "radar": "images/hrrr_radar_f02.png",
@@ -30,7 +30,7 @@
       },
       {
         "fxx": 3,
-        "valid": "23:00",
+        "valid": "00:00",
         "temp": "images/hrrr_temp_f03.png",
         "gust": "images/hrrr_gust_f03.png",
         "radar": "images/hrrr_radar_f03.png",
@@ -39,7 +39,7 @@
       },
       {
         "fxx": 4,
-        "valid": "00:00",
+        "valid": "01:00",
         "temp": "images/hrrr_temp_f04.png",
         "gust": "images/hrrr_gust_f04.png",
         "radar": "images/hrrr_radar_f04.png",
@@ -48,7 +48,7 @@
       },
       {
         "fxx": 5,
-        "valid": "01:00",
+        "valid": "02:00",
         "temp": "images/hrrr_temp_f05.png",
         "gust": "images/hrrr_gust_f05.png",
         "radar": "images/hrrr_radar_f05.png",
@@ -57,7 +57,7 @@
       },
       {
         "fxx": 6,
-        "valid": "02:00",
+        "valid": "03:00",
         "temp": "images/hrrr_temp_f06.png",
         "gust": "images/hrrr_gust_f06.png",
         "radar": "images/hrrr_radar_f06.png",
@@ -66,7 +66,7 @@
       },
       {
         "fxx": 7,
-        "valid": "03:00",
+        "valid": "04:00",
         "temp": "images/hrrr_temp_f07.png",
         "gust": "images/hrrr_gust_f07.png",
         "radar": "images/hrrr_radar_f07.png",
@@ -75,7 +75,7 @@
       },
       {
         "fxx": 8,
-        "valid": "04:00",
+        "valid": "05:00",
         "temp": "images/hrrr_temp_f08.png",
         "gust": "images/hrrr_gust_f08.png",
         "radar": "images/hrrr_radar_f08.png",
@@ -84,7 +84,7 @@
       },
       {
         "fxx": 9,
-        "valid": "05:00",
+        "valid": "06:00",
         "temp": "images/hrrr_temp_f09.png",
         "gust": "images/hrrr_gust_f09.png",
         "radar": "images/hrrr_radar_f09.png",
@@ -93,7 +93,7 @@
       },
       {
         "fxx": 10,
-        "valid": "06:00",
+        "valid": "07:00",
         "temp": "images/hrrr_temp_f10.png",
         "gust": "images/hrrr_gust_f10.png",
         "radar": "images/hrrr_radar_f10.png",
@@ -102,7 +102,7 @@
       },
       {
         "fxx": 11,
-        "valid": "07:00",
+        "valid": "08:00",
         "temp": "images/hrrr_temp_f11.png",
         "gust": "images/hrrr_gust_f11.png",
         "radar": "images/hrrr_radar_f11.png",
@@ -111,7 +111,7 @@
       },
       {
         "fxx": 12,
-        "valid": "08:00",
+        "valid": "09:00",
         "temp": "images/hrrr_temp_f12.png",
         "gust": "images/hrrr_gust_f12.png",
         "radar": "images/hrrr_radar_f12.png",
@@ -120,7 +120,7 @@
       },
       {
         "fxx": 13,
-        "valid": "09:00",
+        "valid": "10:00",
         "temp": "images/hrrr_temp_f13.png",
         "gust": "images/hrrr_gust_f13.png",
         "radar": "images/hrrr_radar_f13.png",
@@ -129,7 +129,7 @@
       },
       {
         "fxx": 14,
-        "valid": "10:00",
+        "valid": "11:00",
         "temp": "images/hrrr_temp_f14.png",
         "gust": "images/hrrr_gust_f14.png",
         "radar": "images/hrrr_radar_f14.png",
@@ -138,7 +138,7 @@
       },
       {
         "fxx": 15,
-        "valid": "11:00",
+        "valid": "12:00",
         "temp": "images/hrrr_temp_f15.png",
         "gust": "images/hrrr_gust_f15.png",
         "radar": "images/hrrr_radar_f15.png",
@@ -147,7 +147,7 @@
       },
       {
         "fxx": 16,
-        "valid": "12:00",
+        "valid": "13:00",
         "temp": "images/hrrr_temp_f16.png",
         "gust": "images/hrrr_gust_f16.png",
         "radar": "images/hrrr_radar_f16.png",
@@ -156,7 +156,7 @@
       },
       {
         "fxx": 17,
-        "valid": "13:00",
+        "valid": "14:00",
         "temp": "images/hrrr_temp_f17.png",
         "gust": "images/hrrr_gust_f17.png",
         "radar": "images/hrrr_radar_f17.png",
@@ -165,7 +165,7 @@
       },
       {
         "fxx": 18,
-        "valid": "14:00",
+        "valid": "15:00",
         "temp": "images/hrrr_temp_f18.png",
         "gust": "images/hrrr_gust_f18.png",
         "radar": "images/hrrr_radar_f18.png",
@@ -174,44 +174,44 @@
       },
       {
         "fxx": 19,
-        "valid": "15:00"
-      },
-      {
-        "fxx": 20,
         "valid": "16:00"
       },
       {
-        "fxx": 21,
+        "fxx": 20,
         "valid": "17:00"
       },
       {
-        "fxx": 22,
+        "fxx": 21,
         "valid": "18:00"
       },
       {
-        "fxx": 23,
+        "fxx": 22,
         "valid": "19:00"
       },
       {
-        "fxx": 24,
+        "fxx": 23,
         "valid": "20:00"
+      },
+      {
+        "fxx": 24,
+        "valid": "21:00"
       }
     ]
   },
   "rap": {
-    "run_time": "2026-03-01 20z",
+    "run_time": "2026-03-01 21z",
     "display_name": "RAP",
     "frames": [
       {
         "fxx": 0,
-        "valid": "20:00",
+        "valid": "21:00",
         "temp": "images/rap_temp_f00.png",
         "gust": "images/rap_gust_f00.png",
         "radar": "images/rap_radar_f00.png"
       },
       {
         "fxx": 1,
-        "valid": "21:00",
+        "valid": "22:00",
         "temp": "images/rap_temp_f01.png",
         "gust": "images/rap_gust_f01.png",
         "radar": "images/rap_radar_f01.png",
@@ -220,7 +220,7 @@
       },
       {
         "fxx": 2,
-        "valid": "22:00",
+        "valid": "23:00",
         "temp": "images/rap_temp_f02.png",
         "gust": "images/rap_gust_f02.png",
         "radar": "images/rap_radar_f02.png",
@@ -229,7 +229,7 @@
       },
       {
         "fxx": 3,
-        "valid": "23:00",
+        "valid": "00:00",
         "temp": "images/rap_temp_f03.png",
         "gust": "images/rap_gust_f03.png",
         "radar": "images/rap_radar_f03.png",
@@ -238,7 +238,7 @@
       },
       {
         "fxx": 4,
-        "valid": "00:00",
+        "valid": "01:00",
         "temp": "images/rap_temp_f04.png",
         "gust": "images/rap_gust_f04.png",
         "radar": "images/rap_radar_f04.png",
@@ -247,7 +247,7 @@
       },
       {
         "fxx": 5,
-        "valid": "01:00",
+        "valid": "02:00",
         "temp": "images/rap_temp_f05.png",
         "gust": "images/rap_gust_f05.png",
         "radar": "images/rap_radar_f05.png",
@@ -256,7 +256,7 @@
       },
       {
         "fxx": 6,
-        "valid": "02:00",
+        "valid": "03:00",
         "temp": "images/rap_temp_f06.png",
         "gust": "images/rap_gust_f06.png",
         "radar": "images/rap_radar_f06.png",
@@ -265,7 +265,7 @@
       },
       {
         "fxx": 7,
-        "valid": "03:00",
+        "valid": "04:00",
         "temp": "images/rap_temp_f07.png",
         "gust": "images/rap_gust_f07.png",
         "radar": "images/rap_radar_f07.png",
@@ -274,7 +274,7 @@
       },
       {
         "fxx": 8,
-        "valid": "04:00",
+        "valid": "05:00",
         "temp": "images/rap_temp_f08.png",
         "gust": "images/rap_gust_f08.png",
         "radar": "images/rap_radar_f08.png",
@@ -283,7 +283,7 @@
       },
       {
         "fxx": 9,
-        "valid": "05:00",
+        "valid": "06:00",
         "temp": "images/rap_temp_f09.png",
         "gust": "images/rap_gust_f09.png",
         "radar": "images/rap_radar_f09.png",
@@ -292,7 +292,7 @@
       },
       {
         "fxx": 10,
-        "valid": "06:00",
+        "valid": "07:00",
         "temp": "images/rap_temp_f10.png",
         "gust": "images/rap_gust_f10.png",
         "radar": "images/rap_radar_f10.png",
@@ -301,7 +301,7 @@
       },
       {
         "fxx": 11,
-        "valid": "07:00",
+        "valid": "08:00",
         "temp": "images/rap_temp_f11.png",
         "gust": "images/rap_gust_f11.png",
         "radar": "images/rap_radar_f11.png",
@@ -310,7 +310,7 @@
       },
       {
         "fxx": 12,
-        "valid": "08:00",
+        "valid": "09:00",
         "temp": "images/rap_temp_f12.png",
         "gust": "images/rap_gust_f12.png",
         "radar": "images/rap_radar_f12.png",
@@ -319,7 +319,7 @@
       },
       {
         "fxx": 13,
-        "valid": "09:00",
+        "valid": "10:00",
         "temp": "images/rap_temp_f13.png",
         "gust": "images/rap_gust_f13.png",
         "radar": "images/rap_radar_f13.png",
@@ -328,7 +328,7 @@
       },
       {
         "fxx": 14,
-        "valid": "10:00",
+        "valid": "11:00",
         "temp": "images/rap_temp_f14.png",
         "gust": "images/rap_gust_f14.png",
         "radar": "images/rap_radar_f14.png",
@@ -337,7 +337,7 @@
       },
       {
         "fxx": 15,
-        "valid": "11:00",
+        "valid": "12:00",
         "temp": "images/rap_temp_f15.png",
         "gust": "images/rap_gust_f15.png",
         "radar": "images/rap_radar_f15.png",
@@ -346,7 +346,7 @@
       },
       {
         "fxx": 16,
-        "valid": "12:00",
+        "valid": "13:00",
         "temp": "images/rap_temp_f16.png",
         "gust": "images/rap_gust_f16.png",
         "radar": "images/rap_radar_f16.png",
@@ -355,7 +355,7 @@
       },
       {
         "fxx": 17,
-        "valid": "13:00",
+        "valid": "14:00",
         "temp": "images/rap_temp_f17.png",
         "gust": "images/rap_gust_f17.png",
         "radar": "images/rap_radar_f17.png",
@@ -364,7 +364,7 @@
       },
       {
         "fxx": 18,
-        "valid": "14:00",
+        "valid": "15:00",
         "temp": "images/rap_temp_f18.png",
         "gust": "images/rap_gust_f18.png",
         "radar": "images/rap_radar_f18.png",
@@ -373,7 +373,7 @@
       },
       {
         "fxx": 19,
-        "valid": "15:00",
+        "valid": "16:00",
         "temp": "images/rap_temp_f19.png",
         "gust": "images/rap_gust_f19.png",
         "radar": "images/rap_radar_f19.png",
@@ -382,7 +382,7 @@
       },
       {
         "fxx": 20,
-        "valid": "16:00",
+        "valid": "17:00",
         "temp": "images/rap_temp_f20.png",
         "gust": "images/rap_gust_f20.png",
         "radar": "images/rap_radar_f20.png",
@@ -391,7 +391,7 @@
       },
       {
         "fxx": 21,
-        "valid": "17:00",
+        "valid": "18:00",
         "temp": "images/rap_temp_f21.png",
         "gust": "images/rap_gust_f21.png",
         "radar": "images/rap_radar_f21.png",
@@ -675,110 +675,170 @@
     ]
   },
   "gefs": {
-    "run_time": "2026-03-01 12z",
+    "run_time": "2026-03-01 18z",
     "display_name": "GEFS",
     "frames": [
       {
         "fxx": 0,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/gefs_temp_f00.png"
       },
       {
         "fxx": 6,
-        "valid": "18:00"
+        "valid": "00:00",
+        "temp": "images/gefs_temp_f06.png",
+        "precip": "images/gefs_precip_f06.png",
+        "snow": "images/gefs_snow_f06.png"
       },
       {
         "fxx": 12,
-        "valid": "00:00"
+        "valid": "06:00",
+        "temp": "images/gefs_temp_f12.png",
+        "precip": "images/gefs_precip_f12.png",
+        "snow": "images/gefs_snow_f12.png"
       },
       {
         "fxx": 18,
-        "valid": "06:00"
+        "valid": "12:00",
+        "temp": "images/gefs_temp_f18.png",
+        "precip": "images/gefs_precip_f18.png",
+        "snow": "images/gefs_snow_f18.png"
       },
       {
         "fxx": 24,
-        "valid": "12:00"
+        "valid": "18:00",
+        "temp": "images/gefs_temp_f24.png",
+        "precip": "images/gefs_precip_f24.png",
+        "snow": "images/gefs_snow_f24.png"
       },
       {
         "fxx": 30,
-        "valid": "18:00"
+        "valid": "00:00",
+        "temp": "images/gefs_temp_f30.png",
+        "precip": "images/gefs_precip_f30.png",
+        "snow": "images/gefs_snow_f30.png"
       },
       {
         "fxx": 36,
-        "valid": "00:00"
+        "valid": "06:00",
+        "temp": "images/gefs_temp_f36.png",
+        "precip": "images/gefs_precip_f36.png",
+        "snow": "images/gefs_snow_f36.png"
       },
       {
         "fxx": 42,
-        "valid": "06:00"
+        "valid": "12:00",
+        "temp": "images/gefs_temp_f42.png",
+        "precip": "images/gefs_precip_f42.png",
+        "snow": "images/gefs_snow_f42.png"
       },
       {
         "fxx": 48,
-        "valid": "12:00"
+        "valid": "18:00",
+        "temp": "images/gefs_temp_f48.png",
+        "precip": "images/gefs_precip_f48.png",
+        "snow": "images/gefs_snow_f48.png"
       },
       {
         "fxx": 54,
-        "valid": "18:00"
+        "valid": "00:00",
+        "temp": "images/gefs_temp_f54.png",
+        "precip": "images/gefs_precip_f54.png",
+        "snow": "images/gefs_snow_f54.png"
       },
       {
         "fxx": 60,
-        "valid": "00:00"
+        "valid": "06:00",
+        "temp": "images/gefs_temp_f60.png",
+        "precip": "images/gefs_precip_f60.png",
+        "snow": "images/gefs_snow_f60.png"
       },
       {
         "fxx": 66,
-        "valid": "06:00"
+        "valid": "12:00",
+        "temp": "images/gefs_temp_f66.png",
+        "precip": "images/gefs_precip_f66.png",
+        "snow": "images/gefs_snow_f66.png"
       },
       {
         "fxx": 72,
-        "valid": "12:00"
+        "valid": "18:00",
+        "temp": "images/gefs_temp_f72.png",
+        "precip": "images/gefs_precip_f72.png",
+        "snow": "images/gefs_snow_f72.png"
       },
       {
         "fxx": 78,
-        "valid": "18:00"
+        "valid": "00:00",
+        "temp": "images/gefs_temp_f78.png",
+        "precip": "images/gefs_precip_f78.png",
+        "snow": "images/gefs_snow_f78.png"
       },
       {
         "fxx": 84,
-        "valid": "00:00"
+        "valid": "06:00",
+        "temp": "images/gefs_temp_f84.png",
+        "precip": "images/gefs_precip_f84.png",
+        "snow": "images/gefs_snow_f84.png"
       },
       {
         "fxx": 90,
-        "valid": "06:00"
+        "valid": "12:00",
+        "temp": "images/gefs_temp_f90.png",
+        "precip": "images/gefs_precip_f90.png",
+        "snow": "images/gefs_snow_f90.png"
       },
       {
         "fxx": 96,
-        "valid": "12:00"
+        "valid": "18:00",
+        "temp": "images/gefs_temp_f96.png",
+        "precip": "images/gefs_precip_f96.png",
+        "snow": "images/gefs_snow_f96.png"
       },
       {
         "fxx": 102,
-        "valid": "18:00"
+        "valid": "00:00",
+        "temp": "images/gefs_temp_f102.png",
+        "precip": "images/gefs_precip_f102.png",
+        "snow": "images/gefs_snow_f102.png"
       },
       {
         "fxx": 108,
-        "valid": "00:00"
+        "valid": "06:00",
+        "temp": "images/gefs_temp_f108.png",
+        "precip": "images/gefs_precip_f108.png",
+        "snow": "images/gefs_snow_f108.png"
       },
       {
         "fxx": 114,
-        "valid": "06:00"
+        "valid": "12:00",
+        "temp": "images/gefs_temp_f114.png",
+        "precip": "images/gefs_precip_f114.png",
+        "snow": "images/gefs_snow_f114.png"
       },
       {
         "fxx": 120,
-        "valid": "12:00"
+        "valid": "18:00",
+        "temp": "images/gefs_temp_f120.png",
+        "precip": "images/gefs_precip_f120.png",
+        "snow": "images/gefs_snow_f120.png"
       }
     ]
   },
   "aigfs": null,
   "ai_gefs": {
-    "run_time": "2026-03-01 12z",
+    "run_time": "2026-03-01 18z",
     "display_name": "AI GEFS",
     "frames": [
       {
         "fxx": 0,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/ai_gefs_temp_f00.png",
         "gust": "images/ai_gefs_gust_f00.png"
       },
       {
         "fxx": 6,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/ai_gefs_temp_f06.png",
         "gust": "images/ai_gefs_gust_f06.png",
         "precip": "images/ai_gefs_precip_f06.png",
@@ -786,7 +846,7 @@
       },
       {
         "fxx": 12,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/ai_gefs_temp_f12.png",
         "gust": "images/ai_gefs_gust_f12.png",
         "precip": "images/ai_gefs_precip_f12.png",
@@ -794,7 +854,7 @@
       },
       {
         "fxx": 18,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/ai_gefs_temp_f18.png",
         "gust": "images/ai_gefs_gust_f18.png",
         "precip": "images/ai_gefs_precip_f18.png",
@@ -802,7 +862,7 @@
       },
       {
         "fxx": 24,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/ai_gefs_temp_f24.png",
         "gust": "images/ai_gefs_gust_f24.png",
         "precip": "images/ai_gefs_precip_f24.png",
@@ -810,7 +870,7 @@
       },
       {
         "fxx": 30,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/ai_gefs_temp_f30.png",
         "gust": "images/ai_gefs_gust_f30.png",
         "precip": "images/ai_gefs_precip_f30.png",
@@ -818,7 +878,7 @@
       },
       {
         "fxx": 36,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/ai_gefs_temp_f36.png",
         "gust": "images/ai_gefs_gust_f36.png",
         "precip": "images/ai_gefs_precip_f36.png",
@@ -826,7 +886,7 @@
       },
       {
         "fxx": 42,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/ai_gefs_temp_f42.png",
         "gust": "images/ai_gefs_gust_f42.png",
         "precip": "images/ai_gefs_precip_f42.png",
@@ -834,7 +894,7 @@
       },
       {
         "fxx": 48,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/ai_gefs_temp_f48.png",
         "gust": "images/ai_gefs_gust_f48.png",
         "precip": "images/ai_gefs_precip_f48.png",
@@ -842,7 +902,7 @@
       },
       {
         "fxx": 54,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/ai_gefs_temp_f54.png",
         "gust": "images/ai_gefs_gust_f54.png",
         "precip": "images/ai_gefs_precip_f54.png",
@@ -850,7 +910,7 @@
       },
       {
         "fxx": 60,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/ai_gefs_temp_f60.png",
         "gust": "images/ai_gefs_gust_f60.png",
         "precip": "images/ai_gefs_precip_f60.png",
@@ -858,7 +918,7 @@
       },
       {
         "fxx": 66,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/ai_gefs_temp_f66.png",
         "gust": "images/ai_gefs_gust_f66.png",
         "precip": "images/ai_gefs_precip_f66.png",
@@ -866,7 +926,7 @@
       },
       {
         "fxx": 72,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/ai_gefs_temp_f72.png",
         "gust": "images/ai_gefs_gust_f72.png",
         "precip": "images/ai_gefs_precip_f72.png",
@@ -874,7 +934,7 @@
       },
       {
         "fxx": 78,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/ai_gefs_temp_f78.png",
         "gust": "images/ai_gefs_gust_f78.png",
         "precip": "images/ai_gefs_precip_f78.png",
@@ -882,7 +942,7 @@
       },
       {
         "fxx": 84,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/ai_gefs_temp_f84.png",
         "gust": "images/ai_gefs_gust_f84.png",
         "precip": "images/ai_gefs_precip_f84.png",
@@ -890,7 +950,7 @@
       },
       {
         "fxx": 90,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/ai_gefs_temp_f90.png",
         "gust": "images/ai_gefs_gust_f90.png",
         "precip": "images/ai_gefs_precip_f90.png",
@@ -898,7 +958,7 @@
       },
       {
         "fxx": 96,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/ai_gefs_temp_f96.png",
         "gust": "images/ai_gefs_gust_f96.png",
         "precip": "images/ai_gefs_precip_f96.png",
@@ -906,7 +966,7 @@
       },
       {
         "fxx": 102,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/ai_gefs_temp_f102.png",
         "gust": "images/ai_gefs_gust_f102.png",
         "precip": "images/ai_gefs_precip_f102.png",
@@ -914,7 +974,7 @@
       },
       {
         "fxx": 108,
-        "valid": "00:00",
+        "valid": "06:00",
         "temp": "images/ai_gefs_temp_f108.png",
         "gust": "images/ai_gefs_gust_f108.png",
         "precip": "images/ai_gefs_precip_f108.png",
@@ -922,7 +982,7 @@
       },
       {
         "fxx": 114,
-        "valid": "06:00",
+        "valid": "12:00",
         "temp": "images/ai_gefs_temp_f114.png",
         "gust": "images/ai_gefs_gust_f114.png",
         "precip": "images/ai_gefs_precip_f114.png",
@@ -930,7 +990,7 @@
       },
       {
         "fxx": 120,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/ai_gefs_temp_f120.png",
         "gust": "images/ai_gefs_gust_f120.png",
         "precip": "images/ai_gefs_precip_f120.png",
