@@ -1088,92 +1088,92 @@
     ]
   },
   "ecmwf_aifs": {
-    "run_time": "2026-03-04 00z",
+    "run_time": "2026-03-04 12z",
     "display_name": "ECMWF AIFS",
     "frames": [
       {
         "fxx": 0,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 6,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 12,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 18,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 24,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 30,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 36,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 42,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 48,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 54,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 60,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 66,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 72,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 78,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 84,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 90,
-        "valid": "18:00"
-      },
-      {
-        "fxx": 96,
-        "valid": "00:00"
-      },
-      {
-        "fxx": 102,
         "valid": "06:00"
       },
       {
-        "fxx": 108,
+        "fxx": 96,
         "valid": "12:00"
       },
       {
-        "fxx": 114,
+        "fxx": 102,
         "valid": "18:00"
       },
       {
-        "fxx": 120,
+        "fxx": 108,
         "valid": "00:00"
+      },
+      {
+        "fxx": 114,
+        "valid": "06:00"
+      },
+      {
+        "fxx": 120,
+        "valid": "12:00"
       }
     ]
   },
@@ -1268,92 +1268,92 @@
     ]
   },
   "ecmwf_ai_ens": {
-    "run_time": "2026-03-04 00z",
+    "run_time": "2026-03-04 12z",
     "display_name": "ECMWF AI ENS",
     "frames": [
       {
         "fxx": 0,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 6,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 12,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 18,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 24,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 30,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 36,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 42,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 48,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 54,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 60,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 66,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 72,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 78,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 84,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 90,
-        "valid": "18:00"
-      },
-      {
-        "fxx": 96,
-        "valid": "00:00"
-      },
-      {
-        "fxx": 102,
         "valid": "06:00"
       },
       {
-        "fxx": 108,
+        "fxx": 96,
         "valid": "12:00"
       },
       {
-        "fxx": 114,
+        "fxx": 102,
         "valid": "18:00"
       },
       {
-        "fxx": 120,
+        "fxx": 108,
         "valid": "00:00"
+      },
+      {
+        "fxx": 114,
+        "valid": "06:00"
+      },
+      {
+        "fxx": 120,
+        "valid": "12:00"
       }
     ]
   }
