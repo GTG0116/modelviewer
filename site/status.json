@@ -619,19 +619,19 @@
     ]
   },
   "nam": {
-    "run_time": "2026-03-12 12z",
+    "run_time": "2026-03-12 18z",
     "display_name": "NAM",
     "frames": [
       {
         "fxx": 0,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/nam_temp_f00.png",
         "gust": "images/nam_gust_f00.png",
         "radar": "images/nam_radar_f00.png"
       },
       {
         "fxx": 6,
-        "valid": "18:00",
+        "valid": "00:00",
         "temp": "images/nam_temp_f06.png",
         "gust": "images/nam_gust_f06.png",
         "radar": "images/nam_radar_f06.png",
@@ -640,92 +640,102 @@
       },
       {
         "fxx": 12,
-        "valid": "00:00"
+        "valid": "06:00",
+        "temp": "images/nam_temp_f12.png",
+        "gust": "images/nam_gust_f12.png",
+        "radar": "images/nam_radar_f12.png",
+        "precip": "images/nam_precip_f12.png",
+        "snow": "images/nam_snow_f12.png"
       },
       {
         "fxx": 18,
-        "valid": "06:00"
+        "valid": "12:00"
       },
       {
         "fxx": 24,
-        "valid": "12:00"
+        "valid": "18:00"
       },
       {
         "fxx": 30,
-        "valid": "18:00"
+        "valid": "00:00"
       },
       {
         "fxx": 36,
-        "valid": "00:00"
-      },
-      {
-        "fxx": 42,
         "valid": "06:00"
       },
       {
-        "fxx": 48,
+        "fxx": 42,
         "valid": "12:00"
       },
       {
-        "fxx": 54,
+        "fxx": 48,
         "valid": "18:00"
       },
       {
-        "fxx": 60,
+        "fxx": 54,
         "valid": "00:00"
+      },
+      {
+        "fxx": 60,
+        "valid": "06:00"
       }
     ]
   },
   "nam3k": {
-    "run_time": "2026-03-12 12z",
+    "run_time": "2026-03-12 18z",
     "display_name": "NAM 3km",
     "frames": [
       {
         "fxx": 0,
-        "valid": "12:00",
+        "valid": "18:00",
         "temp": "images/nam3k_temp_f00.png",
         "gust": "images/nam3k_gust_f00.png",
         "radar": "images/nam3k_radar_f00.png"
       },
       {
         "fxx": 6,
-        "valid": "18:00"
+        "valid": "00:00",
+        "temp": "images/nam3k_temp_f06.png",
+        "gust": "images/nam3k_gust_f06.png",
+        "radar": "images/nam3k_radar_f06.png",
+        "precip": "images/nam3k_precip_f06.png",
+        "snow": "images/nam3k_snow_f06.png"
       },
       {
         "fxx": 12,
-        "valid": "00:00"
+        "valid": "06:00"
       },
       {
         "fxx": 18,
-        "valid": "06:00"
+        "valid": "12:00"
       },
       {
         "fxx": 24,
-        "valid": "12:00"
+        "valid": "18:00"
       },
       {
         "fxx": 30,
-        "valid": "18:00"
+        "valid": "00:00"
       },
       {
         "fxx": 36,
-        "valid": "00:00"
-      },
-      {
-        "fxx": 42,
         "valid": "06:00"
       },
       {
-        "fxx": 48,
+        "fxx": 42,
         "valid": "12:00"
       },
       {
-        "fxx": 54,
+        "fxx": 48,
         "valid": "18:00"
       },
       {
-        "fxx": 60,
+        "fxx": 54,
         "valid": "00:00"
+      },
+      {
+        "fxx": 60,
+        "valid": "06:00"
       }
     ]
   },
@@ -1040,92 +1050,92 @@
     ]
   },
   "ecmwf": {
-    "run_time": "2026-03-12 00z",
+    "run_time": "2026-03-12 12z",
     "display_name": "ECMWF IFS",
     "frames": [
       {
         "fxx": 0,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 6,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 12,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 18,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 24,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 30,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 36,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 42,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 48,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 54,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 60,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 66,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 72,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 78,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 84,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 90,
-        "valid": "18:00"
-      },
-      {
-        "fxx": 96,
-        "valid": "00:00"
-      },
-      {
-        "fxx": 102,
         "valid": "06:00"
       },
       {
-        "fxx": 108,
+        "fxx": 96,
         "valid": "12:00"
       },
       {
-        "fxx": 114,
+        "fxx": 102,
         "valid": "18:00"
       },
       {
-        "fxx": 120,
+        "fxx": 108,
         "valid": "00:00"
+      },
+      {
+        "fxx": 114,
+        "valid": "06:00"
+      },
+      {
+        "fxx": 120,
+        "valid": "12:00"
       }
     ]
   },
@@ -1220,92 +1230,92 @@
     ]
   },
   "ecmwf_ens": {
-    "run_time": "2026-03-12 00z",
+    "run_time": "2026-03-12 12z",
     "display_name": "ECMWF ENS",
     "frames": [
       {
         "fxx": 0,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 6,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 12,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 18,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 24,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 30,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 36,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 42,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 48,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 54,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 60,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 66,
-        "valid": "18:00"
+        "valid": "06:00"
       },
       {
         "fxx": 72,
-        "valid": "00:00"
+        "valid": "12:00"
       },
       {
         "fxx": 78,
-        "valid": "06:00"
+        "valid": "18:00"
       },
       {
         "fxx": 84,
-        "valid": "12:00"
+        "valid": "00:00"
       },
       {
         "fxx": 90,
-        "valid": "18:00"
-      },
-      {
-        "fxx": 96,
-        "valid": "00:00"
-      },
-      {
-        "fxx": 102,
         "valid": "06:00"
       },
       {
-        "fxx": 108,
+        "fxx": 96,
         "valid": "12:00"
       },
       {
-        "fxx": 114,
+        "fxx": 102,
         "valid": "18:00"
       },
       {
-        "fxx": 120,
+        "fxx": 108,
         "valid": "00:00"
+      },
+      {
+        "fxx": 114,
+        "valid": "06:00"
+      },
+      {
+        "fxx": 120,
+        "valid": "12:00"
       }
     ]
   },
